@@ -6,18 +6,18 @@ export const ProfileStats = () => {
     return (
         <View style={styles.statsContainer}>
             <View style={styles.statItem}>
-                <Text style={styles.statValue}>12</Text>
-                <Text style={styles.statLabel}>Crops</Text>
+                <Text style={styles.statValue}>15</Text>
+                <Text style={styles.statLabel}>Projects</Text>
             </View>
             <View style={styles.statDivider} />
             <View style={styles.statItem}>
-                <Text style={styles.statValue}>4</Text>
-                <Text style={styles.statLabel}>Fields</Text>
+                <Text style={styles.statValue}>5</Text>
+                <Text style={styles.statLabel}>Skills</Text>
             </View>
             <View style={styles.statDivider} />
             <View style={styles.statItem}>
-                <Text style={styles.statValue}>85%</Text>
-                <Text style={styles.statLabel}>Health</Text>
+                <Text style={styles.statValue}>4.9</Text>
+                <Text style={styles.statLabel}>Rating</Text>
             </View>
         </View>
     );

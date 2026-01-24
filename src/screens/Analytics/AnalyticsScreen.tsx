@@ -21,14 +21,14 @@ const AnalyticsScreen = () => {
                 { label: 'Sun', height: 30 },
             ],
             stats: [
-                { label: "Total Revenue", value: "₦ 4.2M", trend: "+12%", icon: "attach-money", color: COLORS.primary },
-                { label: "Expenses", value: "₦ 1.1M", trend: "-5%", icon: "trending-down", color: COLORS.error },
-                { label: "Crop Health", value: "94%", trend: "+2%", icon: "local-florist", color: COLORS.success },
-                { label: "Water Usage", value: "2.4k L", trend: "+8%", icon: "water-drop", color: COLORS.secondary },
+                { label: "Total Revenue", value: "₦ 42k", trend: "+12%", icon: "attach-money", color: COLORS.primary },
+                { label: "Expenses", value: "₦ 11k", trend: "-5%", icon: "trending-down", color: COLORS.error },
+                { label: "Jobs Done", value: "8", trend: "+2%", icon: "work", color: COLORS.success },
+                { label: "Hours Logged", value: "32h", trend: "+8%", icon: "schedule", color: COLORS.secondary },
             ],
             insights: [
-                { title: "Optimize Irrigation", text: "Based on soil moisture levels, reducing water usage by 10% in Zone A will not affect yield.", icon: "lightbulb", iconColor: "#FFC107" },
-                { title: "Market Opportunity", text: "Maize prices in Lagos markets have risen 15%. Consider harvesting early next week.", icon: "trending-up", iconColor: COLORS.primary },
+                { title: "Optimize Rates", text: "Carpentry services in your area are charging 15% more. Consider updating your prices.", icon: "lightbulb", iconColor: COLORS.secondary },
+                { title: "Market Opportunity", text: "High demand for welders in Osogbo Central this week.", icon: "trending-up", iconColor: COLORS.primary },
             ]
         },
         Month: {
@@ -39,14 +39,14 @@ const AnalyticsScreen = () => {
                 { label: 'Wk4', height: 90 },
             ],
             stats: [
-                { label: "Total Revenue", value: "₦ 18.5M", trend: "+8%", icon: "attach-money", color: COLORS.primary },
-                { label: "Expenses", value: "₦ 5.2M", trend: "-2%", icon: "trending-down", color: COLORS.error },
-                { label: "Crop Health", value: "92%", trend: "0%", icon: "local-florist", color: COLORS.success },
-                { label: "Water Usage", value: "11.5k L", trend: "-5%", icon: "water-drop", color: COLORS.secondary },
+                { label: "Total Revenue", value: "₦ 185k", trend: "+8%", icon: "attach-money", color: COLORS.primary },
+                { label: "Expenses", value: "₦ 52k", trend: "-2%", icon: "trending-down", color: COLORS.error },
+                { label: "Jobs Done", value: "24", trend: "0%", icon: "work", color: COLORS.success },
+                { label: "Hours Logged", value: "115h", trend: "-5%", icon: "schedule", color: COLORS.secondary },
             ],
             insights: [
-                { title: "Fertilizer Schedule", text: "Upcoming rain predicted for next week. Apply fertilizer within 3 days for maximum absorption.", icon: "event", iconColor: "#FF9800" },
-                { title: "Pest Alert", text: "Regional reports of Fall Armyworm. Inspect maize crops immediately.", icon: "warning", iconColor: COLORS.error },
+                { title: "Skill Upgrade", text: "Learn Advanced Joinery to access higher paying jobs.", icon: "school", iconColor: COLORS.tertiary },
+                { title: "Tool Maintenance", text: "Your power drill warranty expires soon. Schedule a checkup.", icon: "build", iconColor: COLORS.error },
             ]
         },
         Year: {
@@ -57,14 +57,14 @@ const AnalyticsScreen = () => {
                 { label: 'Q4', height: 70 },
             ],
             stats: [
-                { label: "Total Revenue", value: "₦ 245M", trend: "+25%", icon: "attach-money", color: COLORS.primary },
-                { label: "Expenses", value: "₦ 85M", trend: "+10%", icon: "trending-down", color: COLORS.error },
-                { label: "Crop Health", value: "95%", trend: "+5%", icon: "local-florist", color: COLORS.success },
-                { label: "Water Usage", value: "145k L", trend: "-12%", icon: "water-drop", color: COLORS.secondary },
+                { label: "Total Revenue", value: "₦ 2.4M", trend: "+25%", icon: "attach-money", color: COLORS.primary },
+                { label: "Expenses", value: "₦ 850k", trend: "+10%", icon: "trending-down", color: COLORS.error },
+                { label: "Jobs Done", value: "145", trend: "+5%", icon: "work", color: COLORS.success },
+                { label: "Hours Logged", value: "1450h", trend: "-12%", icon: "schedule", color: COLORS.secondary },
             ],
             insights: [
-                { title: "Expansion Plan", text: "Annual yield up 25%. Feasible to expand to 50 more acres next season.", icon: "map", iconColor: COLORS.secondary },
-                { title: "Equipment Upgrade", text: "Tractor maintenance costs high. Consider upgrading fleet.", icon: "build", iconColor: COLORS.textSecondary },
+                { title: "Business Expansion", text: "Revenue up 25%. Consider hiring an apprentice.", icon: "people", iconColor: COLORS.success },
+                { title: "Equipment Upgrade", text: "Saved enough for the new sliding compound miter saw.", icon: "shopping-cart", iconColor: COLORS.textSecondary },
             ]
         }
     };
@@ -117,7 +117,7 @@ const AnalyticsScreen = () => {
         <SafeAreaView style={styles.container} edges={['top']}>
             {/* Header */}
             <View style={styles.header}>
-                <Text style={styles.headerTitle}>Farm Analytics</Text>
+                <Text style={styles.headerTitle}>Business Analytics</Text>
                 <TouchableOpacity style={styles.filterBtn} onPress={togglePeriod}>
                     <Text style={styles.filterText}>{period}</Text>
                     <MaterialIcons name="keyboard-arrow-down" size={20} color={COLORS.primary} />
@@ -128,7 +128,7 @@ const AnalyticsScreen = () => {
                 {/* Chart Section */}
                 <View style={styles.chartContainer}>
                     <View style={styles.chartHeader}>
-                        <Text style={styles.sectionTitle}>Harvest Yield</Text>
+                        <Text style={styles.sectionTitle}>Service Revenue</Text>
                         <TouchableOpacity>
                             <MaterialIcons name="more-horiz" size={24} color={COLORS.textSecondary} />
                         </TouchableOpacity>

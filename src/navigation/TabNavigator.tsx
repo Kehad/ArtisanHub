@@ -6,6 +6,7 @@ import DashboardNavigator from './DashboardNavigator';
 import AnalyticsScreen from '../screens/Analytics/AnalyticsScreen';
 import ChatNavigator from './ChatNavigator';
 import ProfileNavigator from './ProfileNavigator';
+import PortfolioScreen from '@/screens/Profile/PortfolioScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,16 +21,16 @@ export default function TabNavigator({ onFabPress }: TabNavigatorProps) {
         // List of screens where the tab bar should be hidden
         const hiddenScreens = [
             'ChatDetail',
-            'ActiveCrops',
-            'Irrigation',
-            'AIRecommendations',
-            'Tasks',
+            'DigitalTools',
+            'SkillsTraining',
+            'BusinessSuite',
+            'JobConnect',
             'PersonalInfo',
             'SecurityPrivacy',
             'Notifications',
-            'HelpCenter',
             'About',
-            'EditProfile'
+            'EditProfile',
+            'PortfolioScreen'
         ];
 
         // If routeName is undefined, we are at the root of the navigator (e.g., ChatList), so don't hide.

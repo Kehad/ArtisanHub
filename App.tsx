@@ -9,12 +9,15 @@ import SignUp from './src/screens/SignUp';
 import MainApp from './src/screens/MainApp';
 
 import './global.css';
+import PortfolioScreen from '@/screens/Dashboard/Actions/PortfolioScreen';
+
 
 // Define the root stack param list
 export type RootStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
   MainApp: undefined;
+  MyPortfolio: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -33,6 +36,7 @@ export default function App() {
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="MainApp" component={MainApp} />
+         <Stack.Screen name="MyPortfolio" component={PortfolioScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

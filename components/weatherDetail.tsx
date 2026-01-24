@@ -1,75 +1,31 @@
 // --- SUB-COMPONENTS ---
-
 import { StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
 import { COLORS, wp, hp } from "./utils";
 import { MaterialIcons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
 import { Swipeable } from "react-native-gesture-handler";
 
-// 1. Custom Icon Widget
-const CustomIconWidget = ({ iconName, color, size = 24 }: { iconName: any; color: string; size?: number }) => (
-  <MaterialIcons name={iconName} size={size} color={color} />
-);
-
-// 2. Weather Card Widget
-
-
-export const WeatherCardWidget = () => {
-  return (
-    <LinearGradient
-      colors={[COLORS.primary, '#388E3C']} // Gradient approximation
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-      style={styles.weatherCard}
-    >
-      <View style={styles.weatherHeader}>
-        <View>
-          <Text style={styles.weatherLocation}>Osogbo, Osun</Text>
-          <Text style={styles.weatherDate}>Tuesday, Jan 20, 2026</Text>
-        </View>
-        <MaterialIcons name="wb-sunny" size={40} color={COLORS.onPrimary} />
-      </View>
-
-      <View style={styles.weatherBody}>
-        <Text style={styles.weatherTemp}>32°</Text>
-        <View style={styles.weatherInfoContainer}>
-          <Text style={styles.weatherCondition}>Partly Cloudy</Text>
-          <View style={styles.weatherRow}>
-            <View style={styles.weatherDetailRow}>
-              <MaterialIcons name="water-drop" size={16} color="rgba(255,255,255,0.9)" />
-              <Text style={styles.weatherDetailText}> 35% Rain</Text>
-            </View>
-            <View style={[styles.weatherDetailRow, { marginLeft: 16 }]}>
-              <MaterialIcons name="air" size={16} color="rgba(255,255,255,0.9)" />
-              <Text style={styles.weatherDetailText}> 12 km/h</Text>
-            </View>
-          </View>
-        </View>
-      </View>
-
-      <View style={styles.weatherFooter}>
-        <WeatherDetailItem label="High" value="34°" icon="arrow-upward" />
-        <View style={styles.verticalDivider} />
-        <WeatherDetailItem label="Low" value="24°" icon="arrow-downward" />
-        <View style={styles.verticalDivider} />
-        <WeatherDetailItem label="Humidity" value="68%" icon="opacity" />
-      </View>
-    </LinearGradient>
-  );
-};
-
-export const WeatherDetailItem = ({ label, value, icon }: any) => (
-  <View style={styles.weatherDetailItem}>
-    <MaterialIcons name={icon} size={20} color="rgba(255,255,255,0.9)" />
-    <Text style={styles.weatherDetailValue}>{value}</Text>
-    <Text style={styles.weatherDetailLabel}>{label}</Text>
-  </View>
-);
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { ProfileStackParamList } from "../src/navigation/ProfileNavigator";
+import { RootStackParamList } from "App";
 
 // 3. Quick Action Menu (Bottom Sheet Content)
 export const QuickActionMenuWidget = ({ onClose }: { onClose: () => void }) => {
-  const ActionTile = ({ title, subtitle, icon, color }: any) => (
-    <TouchableOpacity style={[styles.actionTile, { borderColor: color + '4D' }]} onPress={onClose}>
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+
+  const handlePress = (screen: keyof RootStackParamList) => {
+    onClose();
+    // Small delay to allow modal to close smoothly before navigating
+    setTimeout(() => {
+      navigation.navigate(screen);
+    }, 300);
+  };
+
+  const ActionTile = ({ title, subtitle, icon, color, screen }: any) => (
+    <TouchableOpacity
+      style={[styles.actionTile, { borderColor: color + '4D' }]}
+      onPress={() => handlePress(screen)}
+    >
       <View style={[styles.actionIconBox, { backgroundColor: color + '1A' }]}>
         <MaterialIcons name={icon} size={24} color={color} />
       </View>
@@ -86,22 +42,11 @@ export const QuickActionMenuWidget = ({ onClose }: { onClose: () => void }) => {
       <View style={styles.bottomSheetHandle} />
       <Text style={styles.bottomSheetTitle}>Quick Actions</Text>
       <ActionTile
-        title="Log Activity"
-        subtitle="Record farming activities"
+        title="My Portfolio"
+        subtitle="My Portfolio data"
         icon="edit-note"
         color={COLORS.primary}
-      />
-      <ActionTile
-        title="Take Photo"
-        subtitle="Capture crop or field images"
-        icon="photo-camera"
-        color={COLORS.secondary}
-      />
-      <ActionTile
-        title="Record Harvest"
-        subtitle="Log harvest data and yields"
-        icon="agriculture"
-        color={COLORS.tertiary}
+        screen="MyPortfolio"
       />
     </View>
   );
@@ -113,12 +58,12 @@ export const FarmSummaryCardWidget = ({ data, onTap, onToggleChanged, onLongPres
     return (
       <View style={styles.swipeActionsContainer}>
         <TouchableOpacity style={[styles.swipeAction, { backgroundColor: COLORS.secondary }]}>
-          <MaterialIcons name="water-drop" size={24} color="white" />
-          <Text style={styles.swipeActionText}>Water</Text>
+          <MaterialIcons name="share" size={24} color="white" />
+          <Text style={styles.swipeActionText}>Share</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.swipeAction, { backgroundColor: COLORS.tertiary }]}>
-          <MaterialIcons name="note-add" size={24} color="black" />
-          <Text style={[styles.swipeActionText, { color: 'black' }]}>Note</Text>
+          <MaterialIcons name="bookmark" size={24} color="black" />
+          <Text style={[styles.swipeActionText, { color: 'black' }]}>Save</Text>
         </TouchableOpacity>
       </View>
     );
@@ -126,7 +71,7 @@ export const FarmSummaryCardWidget = ({ data, onTap, onToggleChanged, onLongPres
 
   return (
     <Swipeable renderRightActions={renderRightActions}>
-      <TouchableOpacity 
+      <TouchableOpacity
         style={[styles.cardContainer, { borderColor: data.statusColor + '4D' }]} // 4D = 30% opacity hex
         onPress={onTap}
         onLongPress={onLongPress}
@@ -134,10 +79,9 @@ export const FarmSummaryCardWidget = ({ data, onTap, onToggleChanged, onLongPres
       >
         <View style={styles.cardHeader}>
           <View style={[styles.cardIconBox, { backgroundColor: data.statusColor + '1A' }]}>
-             {/* Using MaterialCommunityIcons for some specific icons might be better, sticking to MaterialIcons for consistency */}
             <MaterialIcons name={data.icon} size={24} color={data.statusColor} />
           </View>
-          
+
           <View style={styles.cardHeaderTextContainer}>
             <View style={styles.cardTitleRow}>
               <Text style={styles.cardTitle}>{data.title}</Text>
@@ -177,93 +121,6 @@ export const FarmSummaryCardWidget = ({ data, onTap, onToggleChanged, onLongPres
 };
 
 const styles = StyleSheet.create({
-
-  // Weather Card
-  weatherCard: {
-    borderRadius: wp(4),
-    padding: wp(4),
-    width: '100%',
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 5,
-  },
-  weatherHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-  },
-  weatherLocation: {
-    color: COLORS.onPrimary,
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  weatherDate: {
-    color: 'rgba(255,255,255,0.8)',
-    fontSize: 12,
-    marginTop: 4,
-  },
-  weatherBody: {
-    marginTop: hp(2),
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-  },
-  weatherTemp: {
-    color: COLORS.onPrimary,
-    fontSize: 64,
-    fontWeight: '300',
-    lineHeight: 70, // Adjust for font rendering
-  },
-  weatherInfoContainer: {
-    marginLeft: wp(4),
-    marginTop: hp(1),
-  },
-  weatherCondition: {
-    color: COLORS.onPrimary,
-    fontSize: 14,
-    fontWeight: '500',
-    marginBottom: hp(1),
-  },
-  weatherRow: {
-    flexDirection: 'row',
-  },
-  weatherDetailRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  weatherDetailText: {
-    color: 'rgba(255,255,255,0.9)',
-    fontSize: 12,
-    marginLeft: 4,
-  },
-  weatherFooter: {
-    marginTop: hp(2),
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    borderRadius: wp(2),
-    padding: wp(2),
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-  verticalDivider: {
-    width: 1,
-    height: hp(4),
-    backgroundColor: 'rgba(255,255,255,0.3)',
-  },
-  weatherDetailItem: {
-    alignItems: 'center',
-  },
-  weatherDetailValue: {
-    color: COLORS.onPrimary,
-    fontWeight: '600',
-    fontSize: 14,
-    marginTop: 4,
-  },
-  weatherDetailLabel: {
-    color: 'rgba(255,255,255,0.8)',
-    fontSize: 10,
-  },
 
   // Swipe Actions
   swipeActionsContainer: {
@@ -364,11 +221,6 @@ const styles = StyleSheet.create({
     marginRight: 4,
   },
   // Bottom Sheet
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    justifyContent: 'flex-end',
-  },
   bottomSheetContainer: {
     backgroundColor: COLORS.surface,
     borderTopLeftRadius: wp(4),
@@ -401,6 +253,7 @@ const styles = StyleSheet.create({
   actionIconBox: {
     padding: wp(2),
     borderRadius: wp(2),
+    marginRight: wp(3),
   },
   actionTitle: {
     fontSize: 14,
@@ -410,5 +263,18 @@ const styles = StyleSheet.create({
   actionSubtitle: {
     fontSize: 12,
     color: COLORS.textSecondary,
+    marginTop: 2,
   },
+  cancelButton: {
+    marginTop: hp(1),
+    paddingVertical: 16,
+    borderRadius: wp(3),
+    backgroundColor: '#F3F4F6',
+    alignItems: 'center',
+  },
+  cancelButtonText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: COLORS.textPrimary,
+  }
 });

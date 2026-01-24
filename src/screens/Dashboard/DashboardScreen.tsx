@@ -1,6 +1,6 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { COLORS, hp, wp } from "components/utils";
-import { FarmSummaryCardWidget, WeatherCardWidget } from "components/weatherDetail";
+import { FarmSummaryCardWidget } from "components/weatherDetail";
 import React, { JSX, useCallback, useState } from "react";
 import { Alert, StyleSheet, Text, View, RefreshControl, Platform } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { DashboardStackParamList } from "../../navigation/DashboardNavigator";
 
-interface FarmDataItem {
+interface ArtisanDataItem {
     id: number;
     title: string;
     icon: string;
@@ -31,52 +31,51 @@ export default function DashboardScreen(): JSX.Element {
     const [refreshing, setRefreshing] = useState<boolean>(false);
     const [lastSyncTime, setLastSyncTime] = useState<Date>(new Date());
 
-    const [farmData, setFarmData] = useState<FarmDataItem[]>([
+    const [artisanData, setArtisanData] = useState<ArtisanDataItem[]>([
         {
             id: 1,
-            title: "Active Crops",
-            icon: "eco",
-            value: "5 Crops",
-            statusColor: "#4CAF50",
-            subtitle: "Maize - Flowering Stage",
-            details: "Growth stage: 65% complete",
-            actionLabel: "View Details",
-            screen: "ActiveCrops",
+            title: "Digital Tools",
+            icon: "handyman",
+            value: "12 Tools",
+            statusColor: "#0EA5E9",
+            subtitle: "For Carpenters & Welders",
+            details: "Access blueprints and calculation tools",
+            actionLabel: "Explore Tools",
+            screen: "DigitalTools",
         },
         {
             id: 2,
-            title: "Irrigation System",
-            icon: "water-drop",
-            value: "Active",
-            statusColor: "#2196F3",
-            subtitle: "Zone 1 & 2 Running",
-            details: "Next cycle: 6:00 AM tomorrow",
-            actionLabel: "Control",
-            hasToggle: true,
-            toggleValue: true,
-            screen: "Irrigation",
+            title: "Skills Training",
+            icon: "school",
+            value: "3 Courses",
+            statusColor: "#8B5CF6",
+            subtitle: "Modern Techniques",
+            details: "Enrolled: Advanced Woodworking",
+            actionLabel: "Continue Learning",
+            hasToggle: false,
+            screen: "SkillsTraining",
         },
         {
             id: 3,
-            title: "Pending Tasks",
-            icon: "assignment",
-            value: "8 Tasks",
-            statusColor: "#FFC107",
-            subtitle: "3 High Priority",
-            details: "Fertilizer application due today",
-            actionLabel: "View Tasks",
-            screen: "Tasks",
+            title: "Business Suite",
+            icon: "store",
+            value: "Growth",
+            statusColor: "#10B981",
+            subtitle: "Invoicing & Inventory",
+            details: "Manage your shop efficiently",
+            actionLabel: "Manage Business",
+            screen: "BusinessSuite",
         },
         {
             id: 4,
-            title: "AI Recommendations",
-            icon: "lightbulb",
-            value: "4 New",
-            statusColor: "#9C27B0",
-            subtitle: "Pest Control Advisory",
-            details: "Apply neem oil spray this week",
-            actionLabel: "View All",
-            screen: "AIRecommendations",
+            title: "Job Connect",
+            icon: "work",
+            value: "5 Leads",
+            statusColor: "#EA580C",
+            subtitle: "New Opportunities",
+            details: "Local clients looking for services",
+            actionLabel: "View Leads",
+            screen: "JobConnect",
         },
     ]);
 
@@ -96,24 +95,24 @@ export default function DashboardScreen(): JSX.Element {
     };
 
     const toggleSwitch = (id: number, newValue: boolean): void => {
-        setFarmData(prev =>
+        setArtisanData(prev =>
             prev.map(item => item.id === id ? { ...item, toggleValue: newValue } : item)
         );
     };
 
-    const handleLongPress = (item: FarmDataItem): void => {
+    const handleLongPress = (item: ArtisanDataItem): void => {
         Alert.alert(
             "Options",
             `Manage ${item.title}`,
             [
-                { text: "Share with Extension Officer", onPress: () => console.log("Share") },
-                { text: "Export Data", onPress: () => console.log("Export") },
+                { text: "Share Resource", onPress: () => console.log("Share") },
+                { text: "Save for offline", onPress: () => console.log("Save") },
                 { text: "Cancel", style: "cancel" }
             ]
         );
     };
 
-    const handleItemPress = (item: FarmDataItem) => {
+    const handleItemPress = (item: ArtisanDataItem) => {
         if (item.screen) {
             navigation.navigate(item.screen as any);
         } else {
@@ -128,12 +127,12 @@ export default function DashboardScreen(): JSX.Element {
             {/* Header Section */}
             <View style={styles.headerContainer}>
                 <View>
-                    <Text style={styles.headerTitle}>FarmTech Osun</Text>
-                    <Text style={styles.headerSubtitle}>Last synced: {getTimeAgo(lastSyncTime)}</Text>
+                    <Text style={styles.headerTitle}>Osun Artisan Hub</Text>
+                    <Text style={styles.headerSubtitle}>Empowering Local Talent</Text>
                 </View>
                 <View style={styles.headerIcons}>
-                    <MaterialIcons name="gps-fixed" size={20} color={COLORS.onPrimary} style={{ marginRight: 15 }} />
-                    <MaterialIcons name="wifi" size={20} color={COLORS.onPrimary} />
+                    <MaterialIcons name="notifications" size={20} color={COLORS.onPrimary} style={{ marginRight: 15 }} />
+                    <MaterialIcons name="search" size={20} color={COLORS.onPrimary} />
                 </View>
             </View>
 
@@ -143,11 +142,16 @@ export default function DashboardScreen(): JSX.Element {
                     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={COLORS.primary} />
                 }
             >
-                <WeatherCardWidget />
+                {/* Replaced Weather Card with Welcome/Intro Card logic if needed, or just removed */}
+                {/* For now, let's put a simple welcome text area or keep it clean */}
+                <View style={styles.welcomeContainer}>
+                    <Text style={styles.welcomeTitle}>Welcome back, Master Artisan</Text>
+                    <Text style={styles.welcomeSubtitle}>Enhance your craft with digital tools.</Text>
+                </View>
 
-                <Text style={styles.sectionTitle}>Farm Overview</Text>
+                <Text style={styles.sectionTitle}>Your Toolkit</Text>
 
-                {farmData.map((item) => (
+                {artisanData.map((item) => (
                     <FarmSummaryCardWidget
                         key={item.id}
                         data={item}
@@ -207,4 +211,28 @@ const styles = StyleSheet.create({
         marginTop: hp(2),
         marginBottom: hp(1),
     },
+    welcomeContainer: {
+        marginBottom: hp(2),
+        padding: wp(4),
+        backgroundColor: COLORS.surface,
+        borderRadius: wp(3),
+        borderLeftWidth: 4,
+        borderLeftColor: COLORS.primary,
+        elevation: 2,
+        shadowColor: COLORS.primary,
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+    },
+    welcomeTitle: {
+        fontSize: 18,
+        fontWeight: '700',
+        color: COLORS.textPrimary,
+        marginBottom: 4,
+    },
+    welcomeSubtitle: {
+        fontSize: 14,
+        color: COLORS.textSecondary,
+        lineHeight: 20,
+    }
 });

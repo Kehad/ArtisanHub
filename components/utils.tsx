@@ -7,15 +7,15 @@ export const hp = (percentage: number) => (height * percentage) / 100;
 
 // --- THEME CONSTANTS ---
 export const COLORS = {
-  primary: '#4CAF50', // Green
+  primary: '#0F172A', // Slate 900 - Strong, Professional
   onPrimary: '#FFFFFF',
-  secondary: '#2196F3', // Blue
-  tertiary: '#FFC107', // Amber
+  secondary: '#EA580C', // Orange 600 - Vibrant, Action-oriented
+  tertiary: '#0EA5E9', // Sky 500 - Modern, Tech
   surface: '#FFFFFF',
-  background: '#F5F5F5',
-  textPrimary: '#212121',
-  textSecondary: '#757575',
-  border: '#E0E0E0',
-  error: '#B00020',
-  success: '#4CAF50',
+  background: '#F8FAFC', // Slate 50
+  textPrimary: '#0F172A',
+  textSecondary: '#64748B', // Slate 500
+  border: '#E2E8F0', // Slate 200
+  error: '#DC2626', // Red 600
+  success: '#059669', // Emerald 600
 };

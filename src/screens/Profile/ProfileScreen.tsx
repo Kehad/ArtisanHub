@@ -21,7 +21,7 @@ export default function ProfileScreen(): JSX.Element {
                 {/* Profile Header */}
                 <ProfileHeader
                     name="John Doe"
-                    role="Senior Farmer • Osun State"
+                    role="Master Artisan • Osun State"
                     imageUri="https://i.pravatar.cc/300"
                 />
 
@@ -35,6 +35,11 @@ export default function ProfileScreen(): JSX.Element {
                         icon="person-outline"
                         label="Personal Information"
                         onPress={() => navigation.navigate('PersonalInfo')}
+                    />
+                     <MenuItem
+                        icon="person"
+                        label="My Portfolio"
+                        onPress={() => navigation.navigate('PortfolioScreen')}
                     />
                     <MenuItem
                         icon="notifications-none"
@@ -64,7 +69,7 @@ export default function ProfileScreen(): JSX.Element {
                     />
                     <MenuItem
                         icon="info-outline"
-                        label="About FarmTech"
+                        label="About ArtisanHub"
                         onPress={() => navigation.navigate('About')}
                     />
                 </View>

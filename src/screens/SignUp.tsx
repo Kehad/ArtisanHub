@@ -47,10 +47,10 @@ export default function SignUp() {
                 {/* Header Area */}
                 <View style={styles.header}>
                     <View style={styles.logoContainer}>
-                        <MaterialIcons name="person-add" size={40} color={COLORS.primary} />
+                        <MaterialIcons name="engineering" size={40} color={COLORS.primary} />
                     </View>
                     <Text style={styles.title}>Create Account</Text>
-                    <Text style={styles.subtitle}>Join FarmTech Osun today</Text>
+                    <Text style={styles.subtitle}>Join ArtisanHub Osun today</Text>
                 </View>
 
                 {/* Form Area */}
@@ -79,7 +79,7 @@ export default function SignUp() {
                             <MaterialIcons name="email" size={20} color={COLORS.textSecondary} style={styles.inputIcon} />
                             <TextInput
                                 style={styles.input}
-                                placeholder="farmer@example.com"
+                                placeholder="artisan@example.com"
                                 placeholderTextColor="#9E9E9E"
                                 keyboardType="email-address"
                                 autoCapitalize="none"

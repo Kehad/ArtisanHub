@@ -42,10 +42,10 @@ export default function SignIn() {
                 {/* Header / Logo Area */}
                 <View style={styles.header}>
                     <View style={styles.logoContainer}>
-                        <MaterialIcons name="agriculture" size={48} color={COLORS.primary} />
+                        <MaterialIcons name="handyman" size={48} color={COLORS.primary} />
                     </View>
                     <Text style={styles.title}>Welcome Back</Text>
-                    <Text style={styles.subtitle}>Sign in to continue to your farm dashboard</Text>
+                    <Text style={styles.subtitle}>Sign in to your Artisan Hub</Text>
                 </View>
 
                 {/* Form Area */}
@@ -57,7 +57,7 @@ export default function SignIn() {
                             <MaterialIcons name="email" size={20} color={COLORS.textSecondary} style={styles.inputIcon} />
                             <TextInput
                                 style={styles.input}
-                                placeholder="farmer@example.com"
+                                placeholder="artisan@example.com"
                                 placeholderTextColor="#9E9E9E"
                                 keyboardType="email-address"
                                 autoCapitalize="none"

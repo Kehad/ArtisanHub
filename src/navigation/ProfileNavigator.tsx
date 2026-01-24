@@ -6,6 +6,8 @@ import AboutScreen from '../screens/Profile/AboutPage';
 import SecurityPrivacyScreen from '../screens/Profile/SettingsScreen';
 import NotificationsScreen from '../screens/Profile/NotificationScreen';
 import HelpCenterScreen from '../screens/Profile/HelpCenter';
+// import PortfolioScreen from '../screens/Profile/PortfolioScreen';
+
 
 export type ProfileStackParamList = {
     ProfileMain: undefined;
@@ -14,6 +16,7 @@ export type ProfileStackParamList = {
     SecurityPrivacy: undefined;
     HelpCenter: undefined;
     About: undefined;
+    PortfolioScreen: undefined;
 };
 
 const Stack = createStackNavigator<ProfileStackParamList>();
@@ -30,6 +33,7 @@ export default function ProfileNavigator() {
             <Stack.Screen name="SecurityPrivacy" component={SecurityPrivacyScreen} />
             <Stack.Screen name="HelpCenter" component={HelpCenterScreen} />
             <Stack.Screen name="About" component={AboutScreen} />
+            {/* <Stack.Screen name="PortfolioScreen" component={PortfolioScreen} /> */}
         </Stack.Navigator>
     );
 }
