@@ -1,0 +1,194 @@
+{
+  "users": [
+    {
+      "profile": {
+        "name": "Kenny Artisan",
+        "email": "keahnney01@gmail.com",
+        "role": "artisan",
+        "location": "Lagos, Nigeria",
+        "phone": "08123456789",
+        "bio": "Experienced carpenter and furniture designer.",
+        "pic": "https://randomuser.me/api/portraits/men/32.jpg",
+        "_id": "1769653851379",
+        "password": "Keahnney@1",
+        "createdAt": "2026-01-29T02:30:51.379Z"
+      },
+      "portfolios": [
+        {
+          "_id": "port_1",
+          "title": "Custom Mahogany Wardrobe",
+          "category": "Carpentry",
+          "image": "https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=1000",
+          "date": "2025-11-15",
+          "userId": "1769653851379",
+          "description": "A bespoke mahogany wardrobe with sliding doors.",
+          "createdAt": "2026-01-29T10:00:00.000Z"
+        },
+        {
+          "_id": "port_2",
+          "title": "Minimalist Coffee Table",
+          "category": "Furniture",
+          "image": "https://images.unsplash.com/photo-1532372320572-cda25653a26d?q=80&w=1000",
+          "date": "2025-12-10",
+          "userId": "1769653851379",
+          "description": "Oak wood coffee table with a glass top finish.",
+          "createdAt": "2026-01-29T10:05:00.000Z"
+        }
+      ],
+      "jobs": [],
+      "chats": [
+        {
+          "_id": "chat_1",
+          "chatName": "sender",
+          "members": [
+            "user_client_alice",
+            "1769653851379"
+          ],
+          "lastMessage": "Great, see you then!",
+          "lastMessageId": "msg_4",
+          "createdAt": "2026-01-29T12:00:00.000Z",
+          "updatedAt": "2026-01-29T13:45:00.000Z"
+        }
+      ],
+      "messages": [
+        {
+          "_id": "msg_2",
+          "senderId": "1769653851379",
+          "text": "Hi Alice! Thank you very much. How can I help you today?",
+          "chatId": "chat_1",
+          "readBy": [
+            "user_client_alice"
+          ],
+          "createdAt": "2026-01-29T12:10:00.000Z"
+        },
+        {
+          "_id": "msg_4",
+          "senderId": "1769653851379",
+          "text": "Sure, I can be there by 4 PM today.",
+          "chatId": "chat_1",
+          "readBy": [
+            "user_client_alice"
+          ],
+          "createdAt": "2026-01-29T12:15:00.000Z"
+        }
+      ],
+      "notifications": [
+        {
+          "_id": "notif_1",
+          "userId": "1769653851379",
+          "type": "job_alert",
+          "message": "New job posted: 'Fix Broken Door Hinge' matches your skills.",
+          "read": false,
+          "relatedId": "job_1",
+          "createdAt": "2026-01-29T08:05:00.000Z"
+        },
+        {
+          "_id": "notif_3",
+          "userId": "1769653851379",
+          "type": "message",
+          "message": "You have a new message from Alice Client.",
+          "read": true,
+          "relatedId": "chat_1",
+          "createdAt": "2026-01-29T12:05:00.000Z"
+        }
+      ]
+    },
+    {
+      "profile": {
+        "name": "Alice Client",
+        "email": "alice@client.com",
+        "role": "client",
+        "location": "Lagos, Nigeria",
+        "bio": "Homeowner looking for quality renovations.",
+        "pic": "https://randomuser.me/api/portraits/women/44.jpg",
+        "_id": "user_client_alice",
+        "password": "password123",
+        "createdAt": "2026-01-29T09:00:00.000Z"
+      },
+      "portfolios": [],
+      "jobs": [
+        {
+          "_id": "job_1",
+          "title": "Fix Broken Door Hinge",
+          "client": "Alice Client",
+          "location": "Lagos, Nigeria",
+          "budget": 5000,
+          "tags": [
+            "Carpentry",
+            "Repair",
+            "Quick Fix"
+          ],
+          "urgent": true,
+          "posted": "2026-01-29T08:00:00.000Z",
+          "postedBy": "user_client_alice",
+          "applicants": [
+            "1769653851379"
+          ],
+          "description": "My front door hinge is broken and needs immediate replacement.",
+          "status": "open",
+          "createdAt": "2026-01-29T08:00:00.000Z"
+        },
+        {
+          "_id": "job_2",
+          "title": "Install Wooden Flooring",
+          "client": "Alice Client",
+          "location": "Lagos, Nigeria",
+          "budget": 150000,
+          "tags": [
+            "Flooring",
+            "Renovation"
+          ],
+          "urgent": false,
+          "posted": "2026-01-28T14:30:00.000Z",
+          "postedBy": "user_client_alice",
+          "applicants": [],
+          "description": "Need to install wooden flooring in the living room (approx 30sqm). Materials provided.",
+          "status": "open",
+          "createdAt": "2026-01-28T14:30:00.000Z"
+        }
+      ],
+      "chats": [],
+      "messages": [
+        {
+          "_id": "msg_1",
+          "senderId": "user_client_alice",
+          "text": "Hello Kenny, I saw your portfolio and loved the kitchen cabinets.",
+          "chatId": "chat_1",
+          "readBy": [],
+          "createdAt": "2026-01-29T12:05:00.000Z"
+        },
+        {
+          "_id": "msg_3",
+          "senderId": "user_client_alice",
+          "text": "I have a broken door hinge that needs fixing urgently. Could you come take a look?",
+          "chatId": "chat_1",
+          "readBy": [
+            "1769653851379"
+          ],
+          "createdAt": "2026-01-29T12:12:00.000Z"
+        },
+        {
+          "_id": "msg_5",
+          "senderId": "user_client_alice",
+          "text": "Great, see you then!",
+          "chatId": "chat_1",
+          "readBy": [
+            "1769653851379"
+          ],
+          "createdAt": "2026-01-29T12:16:00.000Z"
+        }
+      ],
+      "notifications": [
+        {
+          "_id": "notif_2",
+          "userId": "user_client_alice",
+          "type": "application",
+          "message": "Kenny Artisan applied for your job 'Fix Broken Door Hinge'.",
+          "read": true,
+          "relatedId": "job_1",
+          "createdAt": "2026-01-29T09:30:00.000Z"
+        }
+      ]
+    }
+  ]
+}
