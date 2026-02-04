@@ -70,14 +70,14 @@ export default function DashboardScreen(): JSX.Element {
         },
         {
             id: 4,
-            title: "Job Connect",
-            icon: "work",
+            title: "My analytics",
+            icon: "analytics",
             value: "5 Leads",
             statusColor: "#EA580C",
-            subtitle: "New Opportunities",
-            details: "Local clients looking for services",
+            subtitle: "Reviews",
+            details: "Check my review",
             actionLabel: "View Leads",
-            screen: "JobConnect",
+            screen: "Analtyics",
         },
     ]);
 

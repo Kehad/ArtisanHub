@@ -6,6 +6,7 @@ import DashboardNavigator from './DashboardNavigator';
 import AnalyticsScreen from '../screens/Analytics/AnalyticsScreen';
 import ChatNavigator from './ChatNavigator';
 import ProfileNavigator from './ProfileNavigator';
+import JobsNavigator from './JobsNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -29,7 +30,9 @@ export default function TabNavigator({ onFabPress }: TabNavigatorProps) {
             'Notifications',
             'About',
             'EditProfile',
-            'PortfolioScreen'
+            'PortfolioScreen',
+            'JobDetails',
+            'JobApplication'
         ];
 
         // If routeName is undefined, we are at the root of the navigator (e.g., ChatList), so don't hide.
@@ -54,7 +57,7 @@ export default function TabNavigator({ onFabPress }: TabNavigatorProps) {
 
                 switch (currentRouteName) {
                     case 'Dashboard': activeTab = 'dashboard'; break;
-                    case 'Analytics': activeTab = 'analytics'; break;
+                    case 'Jobs': activeTab = 'jobs'; break;
                     case 'Chat': activeTab = 'chat'; break;
                     case 'Profile': activeTab = 'profile'; break;
                 }
@@ -63,7 +66,7 @@ export default function TabNavigator({ onFabPress }: TabNavigatorProps) {
                     let routeName = 'Dashboard';
                     switch (tab) {
                         case 'dashboard': routeName = 'Dashboard'; break;
-                        case 'analytics': routeName = 'Analytics'; break;
+                        case 'jobs': routeName = 'Jobs'; break;
                         case 'chat': routeName = 'Chat'; break;
                         case 'profile': routeName = 'Profile'; break;
                     }
@@ -80,7 +83,7 @@ export default function TabNavigator({ onFabPress }: TabNavigatorProps) {
             }}
         >
             <Tab.Screen name="Dashboard" component={DashboardNavigator} />
-            <Tab.Screen name="Analytics" component={AnalyticsScreen} />
+            <Tab.Screen name="Jobs" component={JobsNavigator} />
             <Tab.Screen name="Chat" component={ChatNavigator} />
             <Tab.Screen name="Profile" component={ProfileNavigator} />
         </Tab.Navigator>
