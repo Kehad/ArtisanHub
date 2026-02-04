@@ -6,10 +6,12 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { ProfileStackParamList } from '../../navigation/ProfileNavigator';
 import { COLORS, hp, wp } from 'components/utils';
 import { BiometricService } from '../../services/BiometricService'; // Import Service
+import { useAuth } from 'src/context/AuthContext';
 
 type Props = StackScreenProps<ProfileStackParamList, 'SecurityPrivacy'>;
 
 export default function SecurityPrivacyScreen({ navigation }: Props) {
+  const { user, changePassword } = useAuth();
   // Toggle States
   const [biometricEnabled, setBiometricEnabled] = useState(false);
   const [biometricType, setBiometricType] = useState('Biometrics'); // State for label
@@ -21,9 +23,9 @@ export default function SecurityPrivacyScreen({ navigation }: Props) {
   const [passwordModalVisible, setPasswordModalVisible] = useState(false);
 
   // Password Form States
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('Keahnney@111');
+  const [newPassword, setNewPassword] = useState('Keahnney@1');
+  const [confirmPassword, setConfirmPassword] = useState('Keahnney@1');
   const [isLoading, setIsLoading] = useState(false);
 
   React.useEffect(() => {
@@ -54,28 +56,31 @@ export default function SecurityPrivacyScreen({ navigation }: Props) {
   };
 
   // --- HANDLERS ---
-  const handleChangePassword = async () => {
-    if (!currentPassword || !newPassword || !confirmPassword) {
-      await changePassword({user.id, currentPassword, newPassword});
-      Alert.alert('Error', 'Please fill in all fields');
-      return;
-    }
-    if (newPassword !== confirmPassword) {
-      Alert.alert('Error', 'New passwords do not match');
-      return;
-    }
+ const handleChangePassword = async () => {
+  if (!currentPassword || !newPassword || !confirmPassword) {
+    Alert.alert('Error', 'Please fill in all fields');
+    return;
+  }
 
-    setIsLoading(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-      setPasswordModalVisible(false);
-      setCurrentPassword('');
-      setNewPassword('');
-      setConfirmPassword('');
-      Alert.alert('Success', 'Password updated successfully');
-    }, 1500);
-  };
+  if (newPassword !== confirmPassword) {
+    Alert.alert('Error', 'New passwords do not match');
+    return;
+  }
+
+  setIsLoading(true);
+  try {
+    const response = await changePassword({ userId: user?.id, currentPassword, newPassword });
+    setIsLoading(false);
+    setPasswordModalVisible(false);
+    setCurrentPassword('');
+    setNewPassword('');
+    setConfirmPassword('');
+    Alert.alert('Success', 'Password updated successfully');
+  } catch (error) {
+    setIsLoading(false);
+    Alert.alert('Error', 'Failed to update password');
+  }
+};
 
   const handleDeleteAccount = () => {
     Alert.alert(

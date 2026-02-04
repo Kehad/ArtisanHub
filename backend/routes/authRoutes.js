@@ -23,6 +23,8 @@ router.route('/logout')
     .post(logout);
 
 router.route('/change-password')
-    .post(verifyJWT, changePassword);
+    .post(changePassword);
+    // .post(verifyJWT, changePassword)
 
+// 
 export default router;

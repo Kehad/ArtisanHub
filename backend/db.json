@@ -11,7 +11,8 @@
         "pic": "https://randomuser.me/api/portraits/men/32.jpg",
         "_id": "1769653851379",
         "password": "Keahnney@1",
-        "createdAt": "2026-01-29T02:30:51.379Z"
+        "createdAt": "2026-01-29T02:30:51.379Z",
+        "updatedAt": "2026-02-04T10:53:50.976Z"
       },
       "portfolios": [
         {
@@ -189,6 +190,103 @@
           "createdAt": "2026-01-29T09:30:00.000Z"
         }
       ]
+    }
+  ],
+  "jobs": [
+    {
+      "_id": "job_1",
+      "title": "Fix Broken Door Hinge",
+      "client": "Alice Client",
+      "location": "Lagos, Nigeria",
+      "budget": 5000,
+      "tags": [
+        "Carpentry",
+        "Repair",
+        "Quick Fix"
+      ],
+      "urgent": true,
+      "posted": "2026-01-29T08:00:00.000Z",
+      "postedBy": "user_client_alice",
+      "applicants": [
+        "1769653851379"
+      ],
+      "description": "My front door hinge is broken and needs immediate replacement.",
+      "status": "open",
+      "createdAt": "2026-01-29T08:00:00.000Z"
+    },
+    {
+      "_id": "job_2",
+      "title": "Install Wooden Flooring",
+      "client": "Alice Client",
+      "location": "Lekki, Lagos",
+      "budget": 150000,
+      "tags": [
+        "Flooring",
+        "Renovation"
+      ],
+      "urgent": false,
+      "posted": "2026-01-28T14:30:00.000Z",
+      "postedBy": "user_client_alice",
+      "applicants": [],
+      "description": "Need to install wooden flooring in the living room (approx 30sqm). Materials provided.",
+      "status": "open",
+      "createdAt": "2026-01-28T14:30:00.000Z"
+    },
+    {
+      "_id": "job_3",
+      "title": "Custom Bookshelf Construction",
+      "client": "John Doe",
+      "location": "Ikeja, Lagos",
+      "budget": 85000,
+      "tags": [
+        "Carpentry",
+        "Furniture",
+        "Design"
+      ],
+      "urgent": false,
+      "posted": "2026-02-03T09:15:00.000Z",
+      "postedBy": "user_client_john",
+      "applicants": [],
+      "description": "Looking for an artisan to build a floor-to-ceiling bookshelf for my study. Design sketches available.",
+      "status": "open",
+      "createdAt": "2026-02-03T09:15:00.000Z"
+    },
+    {
+      "_id": "job_4",
+      "title": "Office Desk Repair",
+      "client": "TechStart Hub",
+      "location": "Yaba, Lagos",
+      "budget": 12000,
+      "tags": [
+        "Repair",
+        "Furniture"
+      ],
+      "urgent": true,
+      "posted": "2026-02-04T10:00:00.000Z",
+      "postedBy": "user_client_techstart",
+      "applicants": [],
+      "description": "Three office desks have wobbly legs that need stabilizing. Need this done before Monday.",
+      "status": "open",
+      "createdAt": "2026-02-04T10:00:00.000Z"
+    },
+    {
+      "_id": "job_5",
+      "title": "Kitchen Cabinet Refinishing",
+      "client": "Sarah Smith",
+      "location": "Victoria Island, Lagos",
+      "budget": 200000,
+      "tags": [
+        "Carpentry",
+        "Painting",
+        "Renovation"
+      ],
+      "urgent": false,
+      "posted": "2026-02-01T16:45:00.000Z",
+      "postedBy": "user_client_sarah",
+      "applicants": [],
+      "description": "I want to sand down and repaint my existing kitchen cabinets. Looking for a high-quality finish.",
+      "status": "open",
+      "createdAt": "2026-02-01T16:45:00.000Z"
     }
   ]
 }

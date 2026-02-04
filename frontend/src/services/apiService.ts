@@ -5,10 +5,10 @@ import apiClient from '../api/apiClient';
  */
 export const handleRequest = async <T>(request: Promise<any>): Promise<T> => {
     try {
-        console.log(request)
-        console.log('request')
+        // console.log(request)
+        // console.log('request')
         const response = await request;
-        console.log(response);
+        // console.log(response);
         return response.data;
     } catch (error: any) {
         console.error('API Request Error:', error.response?.data || error.message);

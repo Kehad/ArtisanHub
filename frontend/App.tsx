@@ -13,6 +13,7 @@ import SignUp from './src/screens/SignUp';
 import PortfolioScreen from './src/screens/Dashboard/Actions/PortfolioScreen';
 import { AuthProvider, useAuth } from './src/context/AuthContext';
 import { View } from 'react-native';
+import { JobProvider } from 'src/context/JobContext';
 
 // Define the root stack param list
 export type RootStackParamList = {
@@ -60,10 +61,12 @@ function Navigation() {
 export default function App() {
   return (
     <AuthProvider>
-      <NavigationContainer>
-        <StatusBar style="auto" />
-        <Navigation />
-      </NavigationContainer>
+      <JobProvider>
+        <NavigationContainer>
+          <StatusBar style="auto" />
+          <Navigation />
+        </NavigationContainer>
+      </JobProvider>
     </AuthProvider>
   );
 }
@@ -71,8 +74,8 @@ export default function App() {
 const styles = StyleSheet.create({
   loading: {
     flex: 1,
-    justifyContent: 'center', 
+    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5F5F5' 
+    backgroundColor: '#F5F5F5'
   }
 })

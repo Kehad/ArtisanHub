@@ -62,6 +62,7 @@ class MockDb {
     find(collection, query = {}) {
         const data = this.read();
         const items = this.getAllItems(data, collection);
+        // console.log(items)
 
         return items.filter(item => {
             return Object.keys(query).every(key => {
@@ -74,6 +75,8 @@ class MockDb {
 
     findOne(collection, query = {}) {
         const results = this.find(collection, query);
+        console.log(results, 'results');
+        
         return results.length > 0 ? results[0] : null;
     }
 

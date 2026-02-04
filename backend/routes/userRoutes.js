@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const verifyJWT = require('../middleware/verifyJWT');
 const downloadData = require('../controllers/user/downloadData');
 const deleteAccount = require('../controllers/user/deleteAccount');
+const { default: verifyJWT } = require('../middleware/auth');
 
 router.use(verifyJWT);
 

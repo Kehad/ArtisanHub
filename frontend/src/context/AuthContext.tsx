@@ -55,14 +55,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const signIn = async (credentials: any) => {
         const response: any = await apiService.post(API_ENDPOINTS.AUTH.LOGIN, credentials);
-        console.log(response);
+        
+        // 2. Destructure safely
         const { token: newToken, user: newUser } = response;
 
-        await AsyncStorage.removeItem('userToken');
-        await AsyncStorage.removeItem('userData');
-        // await AsyncStorage.setItem('userToken', newToken);
-        // await AsyncStorage.setItem('userData', JSON.stringify(newUser));
+        if (!newToken || !newUser) {
+            throw new Error("Invalid response from server");
+        }
 
+        console.log("Login Success:", newUser.email);
+
+        // 3. Persist Data (Critical for React Native)
+        // We use Promise.all to save both at the same time for performance
+        await Promise.all([
+            AsyncStorage.setItem('userToken', newToken),
+            AsyncStorage.setItem('userData', JSON.stringify(newUser))
+        ]);
+
+        // 4. Update Global State
         setToken(newToken);
         setUser(newUser);
     };
@@ -102,6 +112,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const changePassword = async (data: any) => {
         try {
+            console.log(data, 'data')
             const response: any = await apiService.post(API_ENDPOINTS.AUTH.CHANGE_PASSWORD, data);
             // const { token: newToken, user: newUser } = response;
             console.log('Change Password Success Response:', response);

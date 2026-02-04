@@ -24,12 +24,15 @@ const login = async (req, res) => {
             }
         }
 
+
         if (!user) {
             return res.status(400).json({ message: 'Invalid Credentials' });
         }
 
         // Check password
         const isMatch = (password === user.password) || (await bcrypt.compare(password, user.password).catch(() => false));
+        // 2. Compare the plain text password with the stored hash
+        // const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
             return res.status(400).json({ message: 'Invalid Credentials' });
@@ -43,11 +46,15 @@ const login = async (req, res) => {
             },
         };
 
+        console.log('token')
+
+
         jwt.sign(
             payload,
             process.env.JWT_SECRET || 'secret',
             { expiresIn: '1h' },
             (err, token) => {
+                console.log(token)
                 if (err) throw err;
                 res.json({
                     token,
