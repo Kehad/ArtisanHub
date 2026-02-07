@@ -9,6 +9,7 @@ import HelpCenterScreen from '../screens/Profile/HelpCenter';
 import JobConnectScreen from 'src/screens/Job/JobConnectScreen';
 import JobDetailsScreen from 'src/screens/Job/JobDetailsScreen';
 import JobApplicationScreen from 'src/screens/Job/JobApplicationScreen';
+import AppliedJobsScreen from 'src/screens/Job/AppliedJobsScreen';
 // import PortfolioScreen from '../screens/Profile/PortfolioScreen';
 
 
@@ -16,6 +17,7 @@ export type JobsStackParamList = {
     JobsConnect: undefined;
     JobDetails: { job: any };
     JobApplication: { job: any };
+    AppliedJobs: undefined;
 };
 
 const Stack = createStackNavigator<JobsStackParamList>();
@@ -29,6 +31,7 @@ export default function JobsNavigator() {
             <Stack.Screen name="JobsConnect" component={JobConnectScreen} />
             <Stack.Screen name="JobDetails" component={JobDetailsScreen} />
             <Stack.Screen name="JobApplication" component={JobApplicationScreen} />
+            <Stack.Screen name="AppliedJobs" component={AppliedJobsScreen} />
         </Stack.Navigator>
     );
 }

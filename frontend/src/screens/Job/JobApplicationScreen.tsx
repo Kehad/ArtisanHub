@@ -9,6 +9,7 @@ import { Job, useJobs } from 'src/context/JobContext';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { JobsStackParamList } from 'src/navigation/JobsNavigator';
 import { useGeneral } from 'src/context/GenContent';
+import { useAuth } from 'src/context/AuthContext';
 
 type JobApplicationRouteProp = RouteProp<JobsStackParamList, 'JobApplication'>;
 type JobApplicationNavigationProp = StackNavigationProp<JobsStackParamList, 'JobApplication'>;
@@ -19,6 +20,7 @@ export default function JobApplicationScreen() {
     const { job } = route.params;
     const { applyToJob } = useJobs();
     const { showAlert, showConfirm } = useGeneral();
+    const { user } = useAuth();
 
     const [bidAmount, setBidAmount] = useState(job.budget?.toString() || '');
     const [duration, setDuration] = useState('');
@@ -26,7 +28,7 @@ export default function JobApplicationScreen() {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleSubmit = async () => {
-        console.log("job", job)
+
         // if (!bidAmount || !duration || !coverLetter) {
         //     Alert.alert("Missing Information", "Please fill in all fields before submitting.");
         //     return;
@@ -36,7 +38,12 @@ export default function JobApplicationScreen() {
         try {
             // In a real app, you would send the bidAmount, duration, and coverLetter to the backend
             // For now, we just call the context's applyToJob
-            await applyToJob(job._id);
+            if (user?.id) {
+                await applyToJob(job._id, user.id);
+            } else {
+                showAlert('Error', 'User ID not found', 'error');
+                return;
+            }
 
             showAlert('Application Sent!', 'Your application has been successfully submitted to the client.', 'success');
             navigation.popToTop()

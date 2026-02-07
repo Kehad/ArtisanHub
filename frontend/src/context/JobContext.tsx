@@ -27,7 +27,7 @@ interface JobContextType {
     fetchJobs: () => Promise<void>;
     fetchJobById: (id: string) => Promise<Job | null>;
     postJob: (jobData: any) => Promise<void>;
-    applyToJob: (jobId: string) => Promise<void>;
+    applyToJob: (jobId: string, userId: string) => Promise<void>;
 }
 
 const JobContext = createContext<JobContextType | undefined>(undefined);
@@ -44,12 +44,12 @@ export const JobProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         try {
             // Adjust endpoint path as needed (e.g., '/jobs')
             const response: any = await apiService.get(API_ENDPOINTS.JOBS.GET_ALL);
-            
+
             // Assuming response.data is the array of jobs, or response itself is the array
             // Adjust based on your actual backend response structure
             const jobList = Array.isArray(response) ? response : response.jobs || [];
             console.log("jobList", jobList);
-            
+
             setJobs(jobList);
         } catch (err: any) {
             console.error("Fetch Jobs Failed:", err);
@@ -76,7 +76,7 @@ export const JobProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         try {
             const response: any = await apiService.post(API_ENDPOINTS.JOBS.CREATE || '/jobs', jobData);
             console.log("Job Created:", response);
-            
+
             // Refresh the list immediately after posting
             await fetchJobs();
         } catch (err: any) {
@@ -88,18 +88,18 @@ export const JobProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     };
 
     // 6. Apply to a Job (POST) - For Artisans
-    const applyToJob = async (jobId: string) => {
+    const applyToJob = async (jobId: string, userId: string) => {
         try {
             // Usually endpoints look like: /jobs/apply/:id
             const endpoint = `${API_ENDPOINTS.JOBS.GET_ALL}/apply/${jobId}`;
             const response = await apiService.put(endpoint, {});
             console.log("Applied successfully:", response);
-            
+
             // Optional: Update local state to show 'Applied' status without refreshing everything
-            setJobs(prevJobs => prevJobs.map(job => 
-                job._id === jobId 
-                ? { ...job, applicants: [...job.applicants, "me"] } // Optimistic update
-                : job
+            setJobs(prevJobs => prevJobs.map(job =>
+                job._id === jobId
+                    ? { ...job, applicants: [...job.applicants, userId] } // Optimistic update
+                    : job
             ));
 
         } catch (err: any) {
@@ -114,14 +114,14 @@ export const JobProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }, [fetchJobs]);
 
     return (
-        <JobContext.Provider value={{ 
-            jobs, 
-            loading, 
-            error, 
-            fetchJobs, 
-            fetchJobById, 
-            postJob, 
-            applyToJob 
+        <JobContext.Provider value={{
+            jobs,
+            loading,
+            error,
+            fetchJobs,
+            fetchJobById,
+            postJob,
+            applyToJob
         }}>
             {children}
         </JobContext.Provider>

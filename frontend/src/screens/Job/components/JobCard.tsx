@@ -8,9 +8,10 @@ interface JobCardProps {
     item: Job;
     onPress: () => void;
     onApply: () => void;
+    hasApplied?: boolean;
 }
 
-export const JobCard: React.FC<JobCardProps> = ({ item, onPress, onApply }) => {
+export const JobCard: React.FC<JobCardProps> = ({ item, onPress, onApply, hasApplied }) => {
     return (
         <TouchableOpacity style={styles.jobCard} activeOpacity={0.9} onPress={onPress}>
             <View style={styles.jobHeader}>
@@ -46,10 +47,17 @@ export const JobCard: React.FC<JobCardProps> = ({ item, onPress, onApply }) => {
                 </View>
             </View>
 
-            <TouchableOpacity style={styles.applyButton} onPress={onApply}>
-                <Text style={styles.applyText}>View Details</Text>
-                <MaterialIcons name="arrow-forward" size={16} color="white" />
-            </TouchableOpacity>
+            {hasApplied ? (
+                <View style={[styles.applyButton, styles.appliedButton]}>
+                    <Text style={[styles.applyText, styles.appliedText]}>Applied</Text>
+                    <MaterialIcons name="check-circle" size={16} color={COLORS.primary} />
+                </View>
+            ) : (
+                <TouchableOpacity style={styles.applyButton} onPress={onApply}>
+                    <Text style={styles.applyText}>View Details</Text>
+                    <MaterialIcons name="arrow-forward" size={16} color="white" />
+                </TouchableOpacity>
+            )}
         </TouchableOpacity>
     );
 };
@@ -163,5 +171,14 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         fontSize: 14,
         marginRight: 8,
+    },
+    appliedButton: {
+        backgroundColor: COLORS.surface,
+        borderWidth: 1,
+        borderColor: COLORS.primary,
+    },
+    appliedText: {
+        color: COLORS.primary,
+        fontWeight: 'bold',
     },
 });

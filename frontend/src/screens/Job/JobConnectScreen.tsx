@@ -10,11 +10,13 @@ import { JobFilterModal } from './components/JobFilterModal';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { JobsStackParamList } from 'src/navigation/JobsNavigator';
+import { useAuth } from 'src/context/AuthContext';
 
 type JobScreenNavigationProp = StackNavigationProp<JobsStackParamList, 'JobsConnect'>;
 
 export default function JobConnectScreen() {
     const navigation = useNavigation<JobScreenNavigationProp>();
+    const { user } = useAuth();
 
     const {
         jobs,
@@ -35,6 +37,7 @@ export default function JobConnectScreen() {
             item={item}
             onPress={() => navigation.navigate('JobDetails', { job: item })}
             onApply={() => navigation.navigate('JobDetails', { job: item })}
+            hasApplied={item.applicants && user ? item.applicants.includes(user.id) : false}
         />
     );
 
@@ -47,6 +50,12 @@ export default function JobConnectScreen() {
                 <View style={styles.headerTop}>
                     <Text style={styles.headerTitle}>Job Connect</Text>
                     <View style={styles.headerActions}>
+                        <TouchableOpacity
+                            style={styles.iconButton}
+                            onPress={() => navigation.navigate('AppliedJobs')}
+                        >
+                            <MaterialIcons name="assignment" size={24} color="white" />
+                        </TouchableOpacity>
                         <TouchableOpacity style={styles.iconButton}>
                             <MaterialIcons name="notifications-none" size={24} color="white" />
                         </TouchableOpacity>

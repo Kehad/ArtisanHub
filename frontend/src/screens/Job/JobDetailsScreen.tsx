@@ -9,6 +9,7 @@ import { Job } from 'src/context/JobContext';
 
 import { StackNavigationProp } from '@react-navigation/stack';
 import { JobsStackParamList } from 'src/navigation/JobsNavigator';
+import { useAuth } from 'src/context/AuthContext';
 
 type JobDetailsRouteProp = RouteProp<JobsStackParamList, 'JobDetails'>;
 type JobDetailsNavigationProp = StackNavigationProp<JobsStackParamList, 'JobDetails'>;
@@ -17,6 +18,11 @@ export default function JobDetailsScreen() {
     const navigation = useNavigation<JobDetailsNavigationProp>();
     const route = useRoute<JobDetailsRouteProp>();
     const { job } = route.params;
+    const { user } = useAuth();
+
+    const hasApplied = React.useMemo(() => {
+        return user ? job.applicants?.includes(user.id) : false;
+    }, [job, user]);
 
     const handleApply = () => {
         // Placeholder for application logic
@@ -108,10 +114,17 @@ export default function JobDetailsScreen() {
 
             {/* Bottom Action Bar */}
             <View style={styles.footer}>
-                <TouchableOpacity style={styles.applyButton} onPress={() => navigation.navigate('JobApplication', { job })}>
-                    <Text style={styles.applyButtonText}>Apply Now</Text>
-                    <MaterialIcons name="arrow-forward" size={20} color="white" />
-                </TouchableOpacity>
+                {hasApplied ? (
+                    <View style={[styles.applyButton, styles.appliedButton]}>
+                        <Text style={[styles.applyButtonText, styles.appliedText]}>Application Submitted</Text>
+                        <MaterialIcons name="check-circle" size={20} color={COLORS.primary} />
+                    </View>
+                ) : (
+                    <TouchableOpacity style={styles.applyButton} onPress={() => navigation.navigate('JobApplication', { job })}>
+                        <Text style={styles.applyButtonText}>Apply Now</Text>
+                        <MaterialIcons name="arrow-forward" size={20} color="white" />
+                    </TouchableOpacity>
+                )}
             </View>
         </SafeAreaView>
     );
@@ -305,5 +318,16 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         marginRight: 8,
+    },
+    appliedButton: {
+        backgroundColor: COLORS.surface,
+        borderWidth: 1,
+        borderColor: COLORS.primary,
+        shadowOpacity: 0,
+        elevation: 0,
+    },
+    appliedText: {
+        color: COLORS.primary,
+        fontWeight: 'bold',
     },
 });
