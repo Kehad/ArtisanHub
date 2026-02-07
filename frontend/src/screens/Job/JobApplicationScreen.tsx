@@ -8,6 +8,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { Job, useJobs } from 'src/context/JobContext';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { JobsStackParamList } from 'src/navigation/JobsNavigator';
+import { useGeneral } from 'src/context/GenContent';
 
 type JobApplicationRouteProp = RouteProp<JobsStackParamList, 'JobApplication'>;
 type JobApplicationNavigationProp = StackNavigationProp<JobsStackParamList, 'JobApplication'>;
@@ -17,6 +18,7 @@ export default function JobApplicationScreen() {
     const route = useRoute<JobApplicationRouteProp>();
     const { job } = route.params;
     const { applyToJob } = useJobs();
+    const { showAlert, showConfirm } = useGeneral();
 
     const [bidAmount, setBidAmount] = useState(job.budget?.toString() || '');
     const [duration, setDuration] = useState('');
@@ -24,10 +26,11 @@ export default function JobApplicationScreen() {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleSubmit = async () => {
-        if (!bidAmount || !duration || !coverLetter) {
-            Alert.alert("Missing Information", "Please fill in all fields before submitting.");
-            return;
-        }
+        console.log("job", job)
+        // if (!bidAmount || !duration || !coverLetter) {
+        //     Alert.alert("Missing Information", "Please fill in all fields before submitting.");
+        //     return;
+        // }
 
         setIsSubmitting(true);
         try {
@@ -35,18 +38,24 @@ export default function JobApplicationScreen() {
             // For now, we just call the context's applyToJob
             await applyToJob(job._id);
 
-            Alert.alert(
-                "Application Sent!",
-                "Your application has been successfully submitted to the client.",
-                [
-                    {
-                        text: "OK",
-                        onPress: () => navigation.popToTop() // Go back to Job Connect
-                    }
-                ]
-            );
-        } catch (error) {
-            Alert.alert("Error", "Failed to submit application. Please try again.");
+            showAlert('Application Sent!', 'Your application has been successfully submitted to the client.', 'success');
+            navigation.popToTop()
+
+            // Alert.alert(
+            //     "Application Sent!",
+            //     "Your application has been successfully submitted to the client.",
+            //     [
+            //         {
+            //             text: "OK",
+            //             onPress: () => navigation.popToTop() // Go back to Job Connect
+            //         }
+            //     ]
+            // );
+        } catch (error: any) {
+            console.log('error', error)
+            // Alert.alert("Error", "Failed to submit application. Please try again.");
+            showAlert('Application Failed!', error?.msg, 'error');
+
         } finally {
             setIsSubmitting(false);
         }

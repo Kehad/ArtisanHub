@@ -12,8 +12,15 @@ export const handleRequest = async <T>(request: Promise<any>): Promise<T> => {
         return response.data;
     } catch (error: any) {
         console.error('API Request Error:', error.response?.data || error.message);
+        console.log('error response data', error.response?.data)
+        console.log('error message', error?.message)
 
-        const errorMessage = error.response?.data?.message || error.message || 'An unexpected error occurred';
+        const errorMessage =
+            error.response?.data?.message ||  // 1. Check for specific backend message text (Best)
+            error.response?.data ||           // 2. Check for raw data (Only if it's a plain string)
+            error.message ||                  // 3. Check for Network/Browser error
+            'An unexpected error occurred';   // 4. Fallback
+        console.log('error message', errorMessage)
         throw new Error(errorMessage);
     }
 };

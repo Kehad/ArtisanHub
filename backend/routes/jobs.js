@@ -1,6 +1,10 @@
 import express from 'express';
 import { getJobs, createJob, applyForJob } from '../controllers/jobController.js';
 import auth from '../middleware/auth.js';
+import { deleteJob } from '../controllers/job/deleteJob.js';
+import { getMyJobs } from '../controllers/job/getMyJobs.js';
+import { getJobById } from '../controllers/job/getJobById.js';
+import { updateJob } from '../controllers/job/updateJob.js';
 
 const router = express.Router();
 
@@ -18,5 +22,14 @@ router.post('/', auth, createJob);
 // @desc    Apply for a job
 // @access  Private
 router.put('/apply/:id', auth, applyForJob);
+// router.put('/apply/:id', applyForJob);
+
+// Public Routes
+router.get('/:id', getJobById);
+
+// Private Routes
+router.put('/:id', auth, updateJob); // Update
+router.delete('/:id', auth, deleteJob); // Delete
+router.get('/user/me', auth, getMyJobs); // Get My Jobs
 
 export default router;

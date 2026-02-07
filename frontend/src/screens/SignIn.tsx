@@ -39,7 +39,7 @@ export default function SignIn() {
 
         setIsSubmitting(true);
         try {
-            console.log('sign in')
+            // console.log('sign in')
             await signIn({ email, password });
             // const response = await fetch('http://localhost:5000/api/auth/login', {
             //     method: 'POST',

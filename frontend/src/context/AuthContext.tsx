@@ -63,10 +63,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             throw new Error("Invalid response from server");
         }
 
-        console.log("Login Success:", newUser.email);
+        // console.log("Login Success:", newUser.email);
 
         // 3. Persist Data (Critical for React Native)
         // We use Promise.all to save both at the same time for performance
+        //  Promise.all([
+        //     AsyncStorage.removeItem('userToken'),
+        //     AsyncStorage.removeItem('userData')
+        // ]);
         await Promise.all([
             AsyncStorage.setItem('userToken', newToken),
             AsyncStorage.setItem('userData', JSON.stringify(newUser))

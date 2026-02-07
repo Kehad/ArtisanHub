@@ -48,6 +48,7 @@ export const JobProvider: React.FC<{ children: React.ReactNode }> = ({ children 
             // Assuming response.data is the array of jobs, or response itself is the array
             // Adjust based on your actual backend response structure
             const jobList = Array.isArray(response) ? response : response.jobs || [];
+            console.log("jobList", jobList);
             
             setJobs(jobList);
         } catch (err: any) {
@@ -89,9 +90,9 @@ export const JobProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     // 6. Apply to a Job (POST) - For Artisans
     const applyToJob = async (jobId: string) => {
         try {
-            // Usually endpoints look like: /jobs/:id/apply
-            const endpoint = `${API_ENDPOINTS.JOBS.GET_ALL}/${jobId}/apply`;
-            const response = await apiService.post(endpoint, {});
+            // Usually endpoints look like: /jobs/apply/:id
+            const endpoint = `${API_ENDPOINTS.JOBS.GET_ALL}/apply/${jobId}`;
+            const response = await apiService.put(endpoint, {});
             console.log("Applied successfully:", response);
             
             // Optional: Update local state to show 'Applied' status without refreshing everything
@@ -102,7 +103,7 @@ export const JobProvider: React.FC<{ children: React.ReactNode }> = ({ children 
             ));
 
         } catch (err: any) {
-            console.error("Apply Job Failed:", err);
+            console.error("Apply Job Failed:", err.message);
             throw err;
         }
     };

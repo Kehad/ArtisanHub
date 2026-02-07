@@ -13,7 +13,10 @@ export const dbWrapper = {
         } catch (e) {
             console.log(`Falling back to dummy ${collection} search`);
         }
-        return mockDb.find(collection, query);
+        const results = mockDb.find(collection, query);
+        return results;
+        // Sort by createdAt desc by default
+        // return results.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     },
 
     findOne: async (model, collection, query = {}) => {

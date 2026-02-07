@@ -14,6 +14,7 @@ import PortfolioScreen from './src/screens/Dashboard/Actions/PortfolioScreen';
 import { AuthProvider, useAuth } from './src/context/AuthContext';
 import { View } from 'react-native';
 import { JobProvider } from 'src/context/JobContext';
+import { GeneralProvider } from 'src/context/GenContent';
 
 // Define the root stack param list
 export type RootStackParamList = {
@@ -62,10 +63,12 @@ export default function App() {
   return (
     <AuthProvider>
       <JobProvider>
-        <NavigationContainer>
-          <StatusBar style="auto" />
-          <Navigation />
-        </NavigationContainer>
+        <GeneralProvider>
+          <NavigationContainer>
+            <StatusBar style="auto" />
+            <Navigation />
+          </NavigationContainer>
+        </GeneralProvider>
       </JobProvider>
     </AuthProvider>
   );
