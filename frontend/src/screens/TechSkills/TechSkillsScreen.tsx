@@ -10,44 +10,44 @@ import { useNavigation } from '@react-navigation/native';
 const COURSES = [
     {
         id: '1',
-        title: 'Advanced Woodworking',
-        category: 'Woodworking',
-        instructor: 'Master Carpenter Adebayo',
+        title: 'Introduction to Web Development',
+        category: 'Web Dev',
+        instructor: 'CodeCamp Nigeria',
         progress: 0.65,
         totalLessons: 12,
         completedLessons: 8,
-        thumbnail: 'https://images.unsplash.com/photo-1611135274945-8c7c9c0d3a5e?q=80&w=2670&auto=format&fit=crop', // Woodworking
+        thumbnail: 'https://images.unsplash.com/photo-1593720213428-28a5b9e94613?q=80&w=2670&auto=format&fit=crop', // Coding
         color: '#8B5CF6'
     },
     {
         id: '2',
-        title: 'Modern Welding Safety',
-        category: 'Welding',
-        instructor: 'Safety First NG',
+        title: 'UI/UX Design Fundamentals',
+        category: 'Design',
+        instructor: 'Creative Pros',
         progress: 0.30,
         totalLessons: 5,
         completedLessons: 1,
-        thumbnail: 'https://images.unsplash.com/photo-1504386106331-3e4e71712b38?q=80&w=2687&auto=format&fit=crop', // Welding
+        thumbnail: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=2000&auto=format&fit=crop', // Design
         color: '#EA580C'
     },
     {
         id: '3',
-        title: 'Business for Artisans',
-        category: 'Business',
-        instructor: 'Osun SME Hub',
+        title: 'Data Analysis with Python',
+        category: 'Data Science',
+        instructor: 'Data Insight Hub',
         progress: 0,
         totalLessons: 8,
         completedLessons: 0,
-        thumbnail: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2626&auto=format&fit=crop', // Business
+        thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop', // Data
         color: '#10B981'
     }
 ];
 
-const CATEGORIES = ['All', 'Woodworking', 'Welding', 'Business'];
+const CATEGORIES = ['All', 'Web Dev', 'Design', 'Data Science'];
 
 import { Modal } from 'react-native';
 
-export default function SkillsTrainingScreen() {
+export default function TechSkillsScreen() {
     const navigation = useNavigation();
     const [selectedCategory, setSelectedCategory] = React.useState('All');
     const [showFilter, setShowFilter] = React.useState(false);
@@ -110,7 +110,7 @@ export default function SkillsTrainingScreen() {
                 <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
                     <MaterialIcons name="arrow-back" size={24} color="white" />
                 </TouchableOpacity>
-                <Text style={styles.headerTitle}>Skills Training</Text>
+                <Text style={styles.headerTitle}>Tech Skills</Text>
                 <TouchableOpacity style={styles.filterButton} onPress={() => setShowFilter(!showFilter)}>
                     <MaterialIcons name="filter-list" size={24} color={showFilter ? COLORS.secondary : "white"} />
                 </TouchableOpacity>
@@ -172,8 +172,8 @@ export default function SkillsTrainingScreen() {
 
                         <TouchableOpacity style={styles.promoCard}>
                             <View style={styles.promoContent}>
-                                <Text style={styles.promoTitle}>Mastering Client Relations</Text>
-                                <Text style={styles.promoSubtitle}>Learn how to negotiate and keep clients happy.</Text>
+                                <Text style={styles.promoTitle}>Mastering Freelancing</Text>
+                                <Text style={styles.promoSubtitle}>Build your profile and land your first remote job.</Text>
                                 <View style={styles.promoBtn}>
                                     <Text style={styles.promoBtnText}>View Course</Text>
                                 </View>

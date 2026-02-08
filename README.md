@@ -105,3 +105,17 @@ Agritech/
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
+
+
+### Improved
+Ai can be used in searching for jobs and matching artisans with jobs.
+AI can be layout out the roadmap with career path and skills to be acquired.
+
+
+AI can be used to generate content for the app.
+
+AI can be used to generate personalized learning paths for artisans based on their skills and career goals.
+AI can be used to generate personalized job recommendations for artisans based on their skills and career goals.
+AI can be used to generate personalized training recommendations for artisans based on their skills and career goals.
+AI can be used to generate personalized content for artisans based on their skills and career goals.
+

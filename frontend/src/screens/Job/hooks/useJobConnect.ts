@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { useJobs } from 'src/context/JobContext';
 import { Alert } from 'react-native';
 
-export const FILTER_CATEGORIES = ['All', 'Carpentry', 'Welding', 'Plumbing', 'Furniture', 'Repair'];
+export const FILTER_CATEGORIES = ['All', 'Web Dev', 'Mobile App', 'UI/UX Design', 'Data Science', 'Cybersecurity'];
 
 export const useJobConnect = () => {
     const { jobs, loading, fetchJobs } = useJobs();

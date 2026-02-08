@@ -22,7 +22,7 @@ export default function TabNavigator({ onFabPress }: TabNavigatorProps) {
         const hiddenScreens = [
             'ChatDetail',
             'DigitalTools',
-            'SkillsTraining',
+            'TechSkills',
             'BusinessSuite',
             'JobConnect',
             'PersonalInfo',
@@ -32,7 +32,8 @@ export default function TabNavigator({ onFabPress }: TabNavigatorProps) {
             'EditProfile',
             'PortfolioScreen',
             'JobDetails',
-            'JobApplication'
+            'JobApplication',
+            'AIUsage'
         ];
 
         // If routeName is undefined, we are at the root of the navigator (e.g., ChatList), so don't hide.

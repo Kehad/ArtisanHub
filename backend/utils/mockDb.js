@@ -14,7 +14,7 @@ const initialData = {
                 name: 'John Doe',
                 email: 'keahnney01@gmail.com',
                 password: 'password',
-                role: 'artisan'
+                role: 'developer'
             },
             portfolios: [],
             jobs: [],
@@ -189,70 +189,70 @@ class MockDb {
     //     return null;
     // }
     update(collection, _id, updates) {
-    const data = this.read();
-    let updatedItem = null;
-    let found = false;
+        const data = this.read();
+        let updatedItem = null;
+        let found = false;
 
-    // 1. Try ROOT Level First (e.g., data.jobs, data.users)
-    if (data[collection] && Array.isArray(data[collection])) {
-        
-        // Special Case: 'users' collection has a nested .profile structure
-        if (collection === 'users') {
-            const userIdx = data.users.findIndex(u => u.profile?._id == _id); // Use ?. safely
-            if (userIdx !== -1) {
-                data.users[userIdx].profile = {
-                    ...data.users[userIdx].profile,
-                    ...updates,
-                    updatedAt: new Date().toISOString()
-                };
-                updatedItem = data.users[userIdx].profile;
-                found = true;
-            }
-        } 
-        // Standard Case: Normal root arrays (e.g., data.jobs)
-        else {
-            const idx = data[collection].findIndex(item => item._id == _id);
-            if (idx !== -1) {
-                data[collection][idx] = {
-                    ...data[collection][idx],
-                    ...updates,
-                    updatedAt: new Date().toISOString()
-                };
-                updatedItem = data[collection][idx];
-                found = true;
-            }
-        }
-    }
+        // 1. Try ROOT Level First (e.g., data.jobs, data.users)
+        if (data[collection] && Array.isArray(data[collection])) {
 
-    // 2. Fallback: Search INSIDE Users (Nested Data)
-    // If not found at root, check if it's hidden inside a user (e.g., portfolios)
-    if (!found && data.users) {
-        for (const user of data.users) {
-            // Check if this user has the collection (e.g., user.portfolios)
-            if (user[collection] && Array.isArray(user[collection])) {
-                const idx = user[collection].findIndex(i => i._id == _id);
-                
-                if (idx !== -1) {
-                    user[collection][idx] = {
-                        ...user[collection][idx],
+            // Special Case: 'users' collection has a nested .profile structure
+            if (collection === 'users') {
+                const userIdx = data.users.findIndex(u => u.profile?._id == _id); // Use ?. safely
+                if (userIdx !== -1) {
+                    data.users[userIdx].profile = {
+                        ...data.users[userIdx].profile,
                         ...updates,
                         updatedAt: new Date().toISOString()
                     };
-                    updatedItem = user[collection][idx];
+                    updatedItem = data.users[userIdx].profile;
                     found = true;
-                    break; // Stop loop once found
+                }
+            }
+            // Standard Case: Normal root arrays (e.g., data.jobs)
+            else {
+                const idx = data[collection].findIndex(item => item._id == _id);
+                if (idx !== -1) {
+                    data[collection][idx] = {
+                        ...data[collection][idx],
+                        ...updates,
+                        updatedAt: new Date().toISOString()
+                    };
+                    updatedItem = data[collection][idx];
+                    found = true;
                 }
             }
         }
-    }
 
-    if (updatedItem) {
-        this.save(data);
-        return updatedItem;
+        // 2. Fallback: Search INSIDE Users (Nested Data)
+        // If not found at root, check if it's hidden inside a user (e.g., portfolios)
+        if (!found && data.users) {
+            for (const user of data.users) {
+                // Check if this user has the collection (e.g., user.portfolios)
+                if (user[collection] && Array.isArray(user[collection])) {
+                    const idx = user[collection].findIndex(i => i._id == _id);
+
+                    if (idx !== -1) {
+                        user[collection][idx] = {
+                            ...user[collection][idx],
+                            ...updates,
+                            updatedAt: new Date().toISOString()
+                        };
+                        updatedItem = user[collection][idx];
+                        found = true;
+                        break; // Stop loop once found
+                    }
+                }
+            }
+        }
+
+        if (updatedItem) {
+            this.save(data);
+            return updatedItem;
+        }
+
+        return null;
     }
-    
-    return null;
-}
 
     delete(collection, _id) {
         const data = this.read();
