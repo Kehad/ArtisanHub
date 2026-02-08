@@ -28,7 +28,7 @@ export const applyForJob = async (req, res) => {
 
         job.applicants.push(userId);
 
-        await dbWrapper.update(Job, 'jobs', req.params.id, { applicants: job.applicants });
+        await dbWrapper.update(Job, 'jobs', req.params.id, { applicants: job.applicants, status: 'applied' });
 
         res.json(job.applicants);
         // 6. Update Database

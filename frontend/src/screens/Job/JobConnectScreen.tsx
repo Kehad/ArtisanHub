@@ -32,6 +32,10 @@ export default function JobConnectScreen() {
         FILTER_CATEGORIES
     } = useJobConnect();
 
+    // const jobsForYou = jobs.filter((job) => job.status === 'open' && !job.applicants.includes(user.id));
+    const jobsForYou = jobs.filter((job) =>
+        job.status === 'open' && !job.applicants.includes(user?.id || '')
+    );
     const renderJobItem = ({ item }: { item: any }) => (
         <JobCard
             item={item}
@@ -81,7 +85,7 @@ export default function JobConnectScreen() {
             {/* Stats / Info */}
             <View style={styles.statsBar}>
                 <Text style={styles.statsText}>
-                    Found {jobs.length} {selectedCategory !== 'All' ? selectedCategory : 'active'} jobs
+                    Found {jobsForYou.length} {selectedCategory !== 'All' ? selectedCategory : 'active'} jobs
                 </Text>
                 {selectedCategory !== 'All' && (
                     <TouchableOpacity onPress={() => setSelectedCategory('All')}>
@@ -91,7 +95,7 @@ export default function JobConnectScreen() {
             </View>
 
             <FlatList
-                data={jobs}
+                data={jobsForYou}
                 keyExtractor={(item) => item._id}
                 renderItem={renderJobItem}
                 contentContainerStyle={styles.listContent}

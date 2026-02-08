@@ -208,7 +208,7 @@
       "posted": "2026-01-29T08:00:00.000Z",
       "postedBy": "user_client_alice",
       "applicants": [
-        "1769653851379"
+        "user_client_alice"
       ],
       "description": "My front door hinge is broken and needs immediate replacement.",
       "status": "open",
@@ -232,7 +232,7 @@
         "1769653851379"
       ],
       "description": "Need to install wooden flooring in the living room (approx 30sqm). Materials provided.",
-      "status": "open",
+      "status": "applied",
       "createdAt": "2026-01-28T14:30:00.000Z",
       "updatedAt": "2026-02-04T22:38:50.488Z"
     },
@@ -254,7 +254,7 @@
         "1769653851379"
       ],
       "description": "Looking for an artisan to build a floor-to-ceiling bookshelf for my study. Design sketches available.",
-      "status": "open",
+      "status": "applied",
       "createdAt": "2026-02-03T09:15:00.000Z",
       "updatedAt": "2026-02-06T22:42:40.224Z"
     },
@@ -275,7 +275,7 @@
         "1769653851379"
       ],
       "description": "Three office desks have wobbly legs that need stabilizing. Need this done before Monday.",
-      "status": "open",
+      "status": "applied",
       "createdAt": "2026-02-04T10:00:00.000Z",
       "updatedAt": "2026-02-07T12:57:43.092Z"
     },
@@ -295,6 +295,24 @@
       "postedBy": "user_client_sarah",
       "applicants": [],
       "description": "I want to sand down and repaint my existing kitchen cabinets. Looking for a high-quality finish.",
+      "status": "open",
+      "createdAt": "2026-02-01T16:45:00.000Z"
+    },
+    {
+      "_id": "job_6",
+      "title": "Install Ceiling Fan",
+      "client": "David Mark",
+      "location": "Ikeja, Lagos",
+      "budget": 15000,
+      "tags": [
+        "Carpentry",
+        "Painting"
+      ],
+      "urgent": false,
+      "posted": "2026-02-01T16:45:00.000Z",
+      "postedBy": "user_client_david",
+      "applicants": [],
+      "description": "I want to install a ceiling fan in my living room. Looking for a high-quality finish.",
       "status": "open",
       "createdAt": "2026-02-01T16:45:00.000Z"
     }

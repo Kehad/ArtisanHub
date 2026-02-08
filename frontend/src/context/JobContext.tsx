@@ -15,7 +15,7 @@ export interface Job {
     postedBy: string;
     applicants: string[];
     description: string;
-    status: 'open' | 'closed' | 'in-progress';
+    status: 'open' | 'closed' | 'in-progress' | 'applied';
     createdAt: string;
 }
 

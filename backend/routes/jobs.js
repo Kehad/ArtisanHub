@@ -1,10 +1,12 @@
 import express from 'express';
-import { getJobs, createJob, applyForJob } from '../controllers/jobController.js';
+import { getJobs } from '../controllers/jobController.js';
 import auth from '../middleware/auth.js';
 import { deleteJob } from '../controllers/job/deleteJob.js';
 import { getMyJobs } from '../controllers/job/getMyJobs.js';
 import { getJobById } from '../controllers/job/getJobById.js';
 import { updateJob } from '../controllers/job/updateJob.js';
+import { applyForJob } from '../controllers/job/applyforJob.js';
+import { createJob } from '../controllers/job/createJob.js';
 
 const router = express.Router();
 
@@ -22,7 +24,6 @@ router.post('/', auth, createJob);
 // @desc    Apply for a job
 // @access  Private
 router.put('/apply/:id', auth, applyForJob);
-// router.put('/apply/:id', applyForJob);
 
 // Public Routes
 router.get('/:id', getJobById);

@@ -1,6 +1,6 @@
 // const BASE_URL = 'http://10.0.2.2:5000/api'; // Use 10.0.2.2 for Android Emulator
 // const BASE_URL = 'http://192.168.18.8:5000/api'; // Use 10.0.2.2 for Android Emulator
-const BASE_URL = 'http://192.168.105.78:5000/api'; // Use 10.0.2.2 for Android Emulator
+const BASE_URL = 'http://192.168.137.46:5000/api'; // Use 10.0.2.2 for Android Emulator
 // const BASE_URL = 'http://localhost:5000/api'; // Use localhost for iOS/Web
 
 export const API_ENDPOINTS = {
