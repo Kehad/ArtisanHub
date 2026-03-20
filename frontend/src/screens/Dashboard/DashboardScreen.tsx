@@ -34,17 +34,17 @@ export default function DashboardScreen(): JSX.Element {
     const { user } = useAuth();
 
     const [artisanData, setArtisanData] = useState<ArtisanDataItem[]>([
-        {
-            id: 1,
-            title: "Digital Tools",
-            icon: "computer",
-            value: "12 Tools",
-            statusColor: "#0EA5E9",
-            subtitle: "For Developers & Designers",
-            details: "Access IDEs and design assets",
-            actionLabel: "Explore Tools",
-            screen: "DigitalTools",
-        },
+        // {
+        //     id: 1,
+        //     title: "Digital Tools",
+        //     icon: "computer",
+        //     value: "12 Tools",
+        //     statusColor: "#0EA5E9",
+        //     subtitle: "For Developers & Designers",
+        //     details: "Access IDEs and design assets",
+        //     actionLabel: "Explore Tools",
+        //     screen: "DigitalTools",
+        // },
         {
             id: 2,
             title: "Tech Skills",

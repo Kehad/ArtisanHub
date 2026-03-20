@@ -35,6 +35,7 @@ export const dbWrapper = {
         try {
             if (model && model.db && model.db.readyState === 1 && model.findById) {
                 const item = await model.findById(id);
+                console.log('item dbwrapper', item);
                 if (item) return item;
             }
         } catch (e) {

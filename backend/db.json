@@ -208,12 +208,13 @@
       "posted": "2026-01-29T08:00:00.000Z",
       "postedBy": "user_client_alice",
       "applicants": [
-        "user_client_alice"
+        "user_client_alice",
+        "1769653851379"
       ],
       "description": "Need a responsive landing page for my new startup. Figma design provided.",
-      "status": "open",
+      "status": "applied",
       "createdAt": "2026-01-29T08:00:00.000Z",
-      "updatedAt": "2026-02-07T12:24:51.615Z"
+      "updatedAt": "2026-03-20T13:49:54.646Z"
     },
     {
       "_id": "job_2",
@@ -251,12 +252,13 @@
       "posted": "2026-02-03T09:15:00.000Z",
       "postedBy": "user_client_john",
       "applicants": [
-        "1769653851379"
+        "1769653851379",
+        null
       ],
       "description": "Looking for a designer to create high-fidelity mockups for a fintech app.",
       "status": "applied",
       "createdAt": "2026-02-03T09:15:00.000Z",
-      "updatedAt": "2026-02-06T22:42:40.224Z"
+      "updatedAt": "2026-03-20T13:45:16.319Z"
     },
     {
       "_id": "job_4",

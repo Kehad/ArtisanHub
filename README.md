@@ -44,7 +44,7 @@ git clone <repository-url>
 cd Agritech
 ```
 
-### 2. Backend Setup
+### 2. Backend Setupa
 Navigate to the backend directory, install dependencies, and start the server.
 
 ```bash

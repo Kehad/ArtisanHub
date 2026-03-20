@@ -1,5 +1,5 @@
 import express from 'express';
-import { getJobs } from '../controllers/jobController.js';
+import { getJobs } from '../controllers/job/getJobs.js';
 import auth from '../middleware/auth.js';
 import { deleteJob } from '../controllers/job/deleteJob.js';
 import { getMyJobs } from '../controllers/job/getMyJobs.js';
@@ -23,7 +23,8 @@ router.post('/', auth, createJob);
 // @route   PUT api/jobs/apply/:id
 // @desc    Apply for a job
 // @access  Private
-router.put('/apply/:id', auth, applyForJob);
+// router.put('/apply/:id', auth, applyForJob);
+router.post('/apply/:_id', applyForJob);
 
 // Public Routes
 router.get('/:id', getJobById);

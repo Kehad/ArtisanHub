@@ -1,5 +1,9 @@
 // @desc    Get Single Job by ID
 // @route   GET /api/jobs/:id
+
+import dbWrapper from "../../utils/dbWrapper.js";
+import Job from "../../models/Job.js";
+
 // @access  Public
 export const getJobById = async (req, res) => {
     try {

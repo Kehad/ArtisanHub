@@ -91,8 +91,11 @@ export const JobProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const applyToJob = async (jobId: string, userId: string) => {
         try {
             // Usually endpoints look like: /jobs/apply/:id
+            console.log("jobId", jobId);
+            console.log("userId", userId);
             const endpoint = `${API_ENDPOINTS.JOBS.GET_ALL}/apply/${jobId}`;
-            const response = await apiService.put(endpoint, {});
+            console.log("Applying to job:", endpoint);
+            const response = await apiService.post(endpoint, { userId });
             console.log("Applied successfully:", response);
 
             // Optional: Update local state to show 'Applied' status without refreshing everything

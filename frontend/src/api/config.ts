@@ -1,6 +1,6 @@
 // const BASE_URL = 'http://10.0.2.2:5000/api'; // Use 10.0.2.2 for Android Emulator
 // const BASE_URL = 'http://192.168.18.8:5000/api'; // Use 10.0.2.2 for Android Emulator
-const BASE_URL = 'http://10.14.60.78:5000/api'; // Use 10.0.2.2 for Android Emulator
+const BASE_URL = 'http://10.15.239.78:5000/api'; // Use 10.0.2.2 for Android Emulator
 // const BASE_URL = 'http://localhost:5000/api'; // Use localhost for iOS/Web
 
 export const API_ENDPOINTS = {
@@ -12,6 +12,7 @@ export const API_ENDPOINTS = {
     PORTFOLIO: `${BASE_URL}/portfolio`,
     JOBS: {
         GET_ALL: `${BASE_URL}/jobs`,
+        APPLY: `${BASE_URL}/jobs/apply`,
     },
     CHAT: `${BASE_URL}/chat`,
 };
