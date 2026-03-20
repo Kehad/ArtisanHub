@@ -34,8 +34,17 @@ const jobSchema = new mongoose.Schema({
         default: false,
     },
     applicants: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        userId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+        },
+        bidAmount: Number,
+        duration: String,
+        coverLetter: String,
+        appliedAt: {
+            type: Date,
+            default: Date.now,
+        }
     }],
     createdAt: {
         type: Date,

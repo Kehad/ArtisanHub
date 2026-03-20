@@ -15,4 +15,4 @@ const downloadData = async (req, res) => {
     res.json(mockData);
 };
 
-module.exports = downloadData;
+export default downloadData;

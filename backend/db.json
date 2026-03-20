@@ -2,37 +2,37 @@
   "users": [
     {
       "profile": {
-        "name": "Kenny Artisan",
+        "name": "Kenny Dev",
         "email": "keahnney01@gmail.com",
-        "role": "artisan",
+        "role": "developer",
         "location": "Lagos, Nigeria",
         "phone": "08123456789",
-        "bio": "Experienced carpenter and furniture designer.",
+        "bio": "Experienced Full Stack Developer and UI/UX Designer.",
         "pic": "https://randomuser.me/api/portraits/men/32.jpg",
         "_id": "1769653851379",
         "password": "Keahnney@1",
         "createdAt": "2026-01-29T02:30:51.379Z",
-        "updatedAt": "2026-02-04T10:53:50.976Z"
+        "updatedAt": "2026-02-08T10:00:00.000Z"
       },
       "portfolios": [
         {
           "_id": "port_1",
-          "title": "Custom Mahogany Wardrobe",
-          "category": "Carpentry",
-          "image": "https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=1000",
+          "title": "E-commerce Platform",
+          "category": "Web Dev",
+          "image": "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?q=80&w=1000",
           "date": "2025-11-15",
           "userId": "1769653851379",
-          "description": "A bespoke mahogany wardrobe with sliding doors.",
+          "description": "A full-featured online store with payment integration.",
           "createdAt": "2026-01-29T10:00:00.000Z"
         },
         {
           "_id": "port_2",
-          "title": "Minimalist Coffee Table",
-          "category": "Furniture",
-          "image": "https://images.unsplash.com/photo-1532372320572-cda25653a26d?q=80&w=1000",
+          "title": "Fintech App UI",
+          "category": "UI/UX Design",
+          "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1000",
           "date": "2025-12-10",
           "userId": "1769653851379",
-          "description": "Oak wood coffee table with a glass top finish.",
+          "description": "Modern user interface design for a banking application.",
           "createdAt": "2026-01-29T10:05:00.000Z"
         }
       ],
@@ -45,7 +45,7 @@
             "user_client_alice",
             "1769653851379"
           ],
-          "lastMessage": "Great, see you then!",
+          "lastMessage": "I'll push the code by EOD.",
           "lastMessageId": "msg_4",
           "createdAt": "2026-01-29T12:00:00.000Z",
           "updatedAt": "2026-01-29T13:45:00.000Z"
@@ -55,7 +55,7 @@
         {
           "_id": "msg_2",
           "senderId": "1769653851379",
-          "text": "Hi Alice! Thank you very much. How can I help you today?",
+          "text": "Hi Alice! I can definitely help you build that website.",
           "chatId": "chat_1",
           "readBy": [
             "user_client_alice"
@@ -65,7 +65,7 @@
         {
           "_id": "msg_4",
           "senderId": "1769653851379",
-          "text": "Sure, I can be there by 4 PM today.",
+          "text": "I'll push the code by EOD.",
           "chatId": "chat_1",
           "readBy": [
             "user_client_alice"
@@ -78,7 +78,7 @@
           "_id": "notif_1",
           "userId": "1769653851379",
           "type": "job_alert",
-          "message": "New job posted: 'Fix Broken Door Hinge' matches your skills.",
+          "message": "New job posted: 'Build Company Website' matches your skills.",
           "read": false,
           "relatedId": "job_1",
           "createdAt": "2026-01-29T08:05:00.000Z"
@@ -100,7 +100,7 @@
         "email": "alice@client.com",
         "role": "client",
         "location": "Lagos, Nigeria",
-        "bio": "Homeowner looking for quality renovations.",
+        "bio": "Startup founder looking for tech talent.",
         "pic": "https://randomuser.me/api/portraits/women/44.jpg",
         "_id": "user_client_alice",
         "password": "password123",
@@ -110,14 +110,14 @@
       "jobs": [
         {
           "_id": "job_1",
-          "title": "Fix Broken Door Hinge",
+          "title": "Build Company Website",
           "client": "Alice Client",
-          "location": "Lagos, Nigeria",
-          "budget": 5000,
+          "location": "Remote",
+          "budget": 150000,
           "tags": [
-            "Carpentry",
-            "Repair",
-            "Quick Fix"
+            "Web Dev",
+            "React",
+            "Frontend"
           ],
           "urgent": true,
           "posted": "2026-01-29T08:00:00.000Z",
@@ -125,25 +125,25 @@
           "applicants": [
             "1769653851379"
           ],
-          "description": "My front door hinge is broken and needs immediate replacement.",
+          "description": "Need a responsive landing page for my new startup. Figma design provided.",
           "status": "open",
           "createdAt": "2026-01-29T08:00:00.000Z"
         },
         {
           "_id": "job_2",
-          "title": "Install Wooden Flooring",
+          "title": "Fix React Bug",
           "client": "Alice Client",
-          "location": "Lagos, Nigeria",
-          "budget": 150000,
+          "location": "Remote",
+          "budget": 50000,
           "tags": [
-            "Flooring",
-            "Renovation"
+            "Web Dev",
+            "Debugging"
           ],
           "urgent": false,
           "posted": "2026-01-28T14:30:00.000Z",
           "postedBy": "user_client_alice",
           "applicants": [],
-          "description": "Need to install wooden flooring in the living room (approx 30sqm). Materials provided.",
+          "description": "Application crashes on the checkout screen. Need an expert to debug.",
           "status": "open",
           "createdAt": "2026-01-28T14:30:00.000Z"
         }
@@ -153,7 +153,7 @@
         {
           "_id": "msg_1",
           "senderId": "user_client_alice",
-          "text": "Hello Kenny, I saw your portfolio and loved the kitchen cabinets.",
+          "text": "Hello Kenny, I saw your portfolio and loved the E-commerce site.",
           "chatId": "chat_1",
           "readBy": [],
           "createdAt": "2026-01-29T12:05:00.000Z"
@@ -161,7 +161,7 @@
         {
           "_id": "msg_3",
           "senderId": "user_client_alice",
-          "text": "I have a broken door hinge that needs fixing urgently. Could you come take a look?",
+          "text": "Can you start working on the landing page immediately?",
           "chatId": "chat_1",
           "readBy": [
             "1769653851379"
@@ -171,7 +171,7 @@
         {
           "_id": "msg_5",
           "senderId": "user_client_alice",
-          "text": "Great, see you then!",
+          "text": "Excellent.",
           "chatId": "chat_1",
           "readBy": [
             "1769653851379"
@@ -184,7 +184,7 @@
           "_id": "notif_2",
           "userId": "user_client_alice",
           "type": "application",
-          "message": "Kenny Artisan applied for your job 'Fix Broken Door Hinge'.",
+          "message": "Kenny Dev applied for your job 'Build Company Website'.",
           "read": true,
           "relatedId": "job_1",
           "createdAt": "2026-01-29T09:30:00.000Z"
@@ -194,97 +194,128 @@
   ],
   "jobs": [
     {
-      "_id": "job_1",
-      "title": "Fix Broken Door Hinge",
+      "_id": "12344job",
+      "title": "Build Company Website",
       "client": "Alice Client",
-      "location": "Lagos, Nigeria",
-      "budget": 5000,
+      "location": "Remote",
+      "budget": 150000,
       "tags": [
-        "Carpentry",
-        "Repair",
-        "Quick Fix"
+        "Web Dev",
+        "React",
+        "Frontend"
       ],
       "urgent": true,
       "posted": "2026-01-29T08:00:00.000Z",
       "postedBy": "user_client_alice",
       "applicants": [
+        "user_client_alice",
         "1769653851379"
       ],
-      "description": "My front door hinge is broken and needs immediate replacement.",
-      "status": "open",
-      "createdAt": "2026-01-29T08:00:00.000Z"
+      "description": "Need a responsive landing page for my new startup. Figma design provided.",
+      "status": "applied",
+      "createdAt": "2026-01-29T08:00:00.000Z",
+      "updatedAt": "2026-03-20T13:49:54.646Z"
     },
     {
       "_id": "job_2",
-      "title": "Install Wooden Flooring",
+      "title": "Fix React Bug",
       "client": "Alice Client",
-      "location": "Lekki, Lagos",
-      "budget": 150000,
+      "location": "Remote",
+      "budget": 50000,
       "tags": [
-        "Flooring",
-        "Renovation"
+        "Web Dev",
+        "Debugging"
       ],
       "urgent": false,
       "posted": "2026-01-28T14:30:00.000Z",
       "postedBy": "user_client_alice",
-      "applicants": [],
-      "description": "Need to install wooden flooring in the living room (approx 30sqm). Materials provided.",
-      "status": "open",
-      "createdAt": "2026-01-28T14:30:00.000Z"
+      "applicants": [
+        "1769653851379"
+      ],
+      "description": "Application crashes on the checkout screen. Need an expert to debug.",
+      "status": "applied",
+      "createdAt": "2026-01-28T14:30:00.000Z",
+      "updatedAt": "2026-02-04T22:38:50.488Z"
     },
     {
       "_id": "job_3",
-      "title": "Custom Bookshelf Construction",
+      "title": "Mobile App UI Design",
       "client": "John Doe",
-      "location": "Ikeja, Lagos",
+      "location": "Remote",
       "budget": 85000,
       "tags": [
-        "Carpentry",
-        "Furniture",
-        "Design"
+        "UI/UX Design",
+        "Figma",
+        "Mobile"
       ],
       "urgent": false,
       "posted": "2026-02-03T09:15:00.000Z",
       "postedBy": "user_client_john",
-      "applicants": [],
-      "description": "Looking for an artisan to build a floor-to-ceiling bookshelf for my study. Design sketches available.",
-      "status": "open",
-      "createdAt": "2026-02-03T09:15:00.000Z"
+      "applicants": [
+        "1769653851379",
+        null
+      ],
+      "description": "Looking for a designer to create high-fidelity mockups for a fintech app.",
+      "status": "applied",
+      "createdAt": "2026-02-03T09:15:00.000Z",
+      "updatedAt": "2026-03-20T13:45:16.319Z"
     },
     {
       "_id": "job_4",
-      "title": "Office Desk Repair",
+      "title": "Python Script for Data scraping",
       "client": "TechStart Hub",
-      "location": "Yaba, Lagos",
-      "budget": 12000,
+      "location": "Remote",
+      "budget": 30000,
       "tags": [
-        "Repair",
-        "Furniture"
+        "Data Science",
+        "Python",
+        "Scripting"
       ],
       "urgent": true,
       "posted": "2026-02-04T10:00:00.000Z",
       "postedBy": "user_client_techstart",
-      "applicants": [],
-      "description": "Three office desks have wobbly legs that need stabilizing. Need this done before Monday.",
-      "status": "open",
-      "createdAt": "2026-02-04T10:00:00.000Z"
+      "applicants": [
+        "1769653851379"
+      ],
+      "description": "Need a script to scrape real estate prices from a listing site.",
+      "status": "applied",
+      "createdAt": "2026-02-04T10:00:00.000Z",
+      "updatedAt": "2026-02-07T12:57:43.092Z"
     },
     {
       "_id": "job_5",
-      "title": "Kitchen Cabinet Refinishing",
+      "title": "Setup AWS Server",
       "client": "Sarah Smith",
-      "location": "Victoria Island, Lagos",
-      "budget": 200000,
+      "location": "Remote",
+      "budget": 100000,
       "tags": [
-        "Carpentry",
-        "Painting",
-        "Renovation"
+        "Web Dev",
+        "DevOps",
+        "AWS"
       ],
       "urgent": false,
       "posted": "2026-02-01T16:45:00.000Z",
       "postedBy": "user_client_sarah",
       "applicants": [],
-      "description": "I want to sand down and repaint my existing kitchen cabinets. Looking for a high-quality finish.",
+      "description": "Need help configuring an EC2 instance and deploying a Node.js app.",
+      "status": "open",
+      "createdAt": "2026-02-01T16:45:00.000Z"
+    },
+    {
+      "_id": "job_6",
+      "title": "Logo Design for Startup",
+      "client": "David Mark",
+      "location": "Remote",
+      "budget": 25000,
+      "tags": [
+        "UI/UX Design",
+        "Branding"
+      ],
+      "urgent": false,
+      "posted": "2026-02-01T16:45:00.000Z",
+      "postedBy": "user_client_david",
+      "applicants": [],
+      "description": "Minimalist logo design needed for a new coffee brand.",
       "status": "open",
       "createdAt": "2026-02-01T16:45:00.000Z"
     }

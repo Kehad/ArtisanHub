@@ -13,7 +13,10 @@ export const dbWrapper = {
         } catch (e) {
             console.log(`Falling back to dummy ${collection} search`);
         }
-        return mockDb.find(collection, query);
+        const results = mockDb.find(collection, query);
+        return results;
+        // Sort by createdAt desc by default
+        // return results.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     },
 
     findOne: async (model, collection, query = {}) => {
@@ -32,6 +35,7 @@ export const dbWrapper = {
         try {
             if (model && model.db && model.db.readyState === 1 && model.findById) {
                 const item = await model.findById(id);
+                console.log('item dbwrapper', item);
                 if (item) return item;
             }
         } catch (e) {

@@ -12,4 +12,4 @@ const deleteAccount = async (req, res) => {
     res.json({ message: 'Account deleted successfully' });
 };
 
-module.exports = deleteAccount;
+export default deleteAccount;

@@ -1,10 +1,8 @@
 import express from 'express';
-import {
-    getPortfolioItems,
-    createPortfolioItem,
-    updatePortfolioItem,
-    deletePortfolioItem
-} from '../controllers/portfolioController.js';
+import { getPortfolioItems } from '../controllers/portfolio/getPortfolioItems.js';
+import { createPortfolioItem } from '../controllers/portfolio/createPortfolioItem.js';
+import { updatePortfolioItem } from '../controllers/portfolio/updatePortfolioItem.js';
+import { deletePortfolioItem } from '../controllers/portfolio/deletePortfolioItem.js';
 import auth from '../middleware/auth.js';
 
 const router = express.Router();

@@ -1,9 +1,9 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { COLORS } from "./utils";
+import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
+import { COLORS, wp } from "./utils";
 
-export type TabType = 'dashboard' | 'analytics' | 'chat' | 'profile';
+export type TabType = 'dashboard' | 'jobs' | 'chat' | 'profile';
 
 interface BottomNavBarProps {
     activeTab: TabType;
@@ -11,39 +11,55 @@ interface BottomNavBarProps {
     onFabPress: () => void;
 }
 
-export const BottomNavBar = ({ activeTab, onTabPress, onFabPress }: BottomNavBarProps) => {
+const TabItem = ({ name, icon, active, onPress }: { name: string, icon: any, active: boolean, onPress: () => void }) => (
+    <TouchableOpacity onPress={onPress} style={styles.tabItem}>
+        <MaterialIcons name={icon} size={24} color={active ? COLORS.primary : "#9E9E9E"} />
+        <Text style={[styles.tabLabel, { color: active ? COLORS.primary : "#9E9E9E" }]}>{name}</Text>
+    </TouchableOpacity>
+);
 
-    const getIconColor = (tab: TabType) => {
-        return activeTab === tab ? COLORS.primary : "#BDBDBD";
-    };
+export const BottomNavBar = ({ activeTab, onTabPress, onFabPress }: BottomNavBarProps) => {
 
     return (
         <>
             <TouchableOpacity
                 style={styles.fab}
                 onPress={onFabPress}
+                activeOpacity={0.8}
             >
-                <MaterialIcons name="add" size={28} color="white" />
+                <MaterialIcons name="add" size={32} color="white" />
             </TouchableOpacity>
 
             <View style={styles.bottomBar}>
-                <TouchableOpacity onPress={() => onTabPress('dashboard')} style={styles.tabItem}>
-                    <MaterialIcons name="dashboard" size={28} color={getIconColor('dashboard')} />
-                </TouchableOpacity>
+                <TabItem
+                    name="Home"
+                    icon="dashboard"
+                    active={activeTab === 'dashboard'}
+                    onPress={() => onTabPress('dashboard')}
+                />
 
-                <TouchableOpacity onPress={() => onTabPress('analytics')} style={styles.tabItem}>
-                    <MaterialIcons name="analytics" size={28} color={getIconColor('analytics')} />
-                </TouchableOpacity>
+                <TabItem
+                    name="Jobs"
+                    icon="business-center"
+                    active={activeTab === 'jobs'}
+                    onPress={() => onTabPress('jobs')}
+                />
 
-                <View style={{ width: 40 }} />
+                <View style={{ width: wp(12) }} />
 
-                <TouchableOpacity onPress={() => onTabPress('chat')} style={styles.tabItem}>
-                    <MaterialIcons name="chat" size={28} color={getIconColor('chat')} />
-                </TouchableOpacity>
+                <TabItem
+                    name="Chat"
+                    icon="chat-bubble-outline"
+                    active={activeTab === 'chat'}
+                    onPress={() => onTabPress('chat')}
+                />
 
-                <TouchableOpacity onPress={() => onTabPress('profile')} style={styles.tabItem}>
-                    <MaterialIcons name="person" size={28} color={getIconColor('profile')} />
-                </TouchableOpacity>
+                <TabItem
+                    name="Profile"
+                    icon="person-outline"
+                    active={activeTab === 'profile'}
+                    onPress={() => onTabPress('profile')}
+                />
             </View>
         </>
     );
@@ -55,33 +71,50 @@ const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0,
-        height: 70,
+        height: 70, // Increased height for labels
         backgroundColor: COLORS.surface,
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        borderTopWidth: 1,
-        borderTopColor: '#E0E0E0',
-        paddingBottom: 10,
+        paddingBottom: 8,
+        paddingTop: 8,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: -2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 10,
+        elevation: 10,
+        borderTopWidth: 0, // Remove border for cleaner shadow look
     },
     tabItem: {
-        padding: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 4,
+        minWidth: 60,
+    },
+    tabLabel: {
+        fontSize: 10,
+        marginTop: 4,
+        fontWeight: '500',
     },
     fab: {
         position: 'absolute',
-        bottom: 40,
+        bottom: 35, // Adjusted to float above the bar
         alignSelf: 'center',
         backgroundColor: COLORS.primary,
-        width: 60,
-        height: 60,
-        borderRadius: 30,
+        width: 56,
+        height: 56,
+        borderRadius: 28,
         justifyContent: 'center',
         alignItems: 'center',
-        elevation: 6,
+        elevation: 8,
         zIndex: 10,
-        shadowColor: "#000",
+        shadowColor: COLORS.primary,
         shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.3,
-        shadowRadius: 4,
+        shadowOpacity: 0.4,
+        shadowRadius: 8,
+        borderWidth: 4,
+        borderColor: COLORS.background, // Creates a cutout effect
     },
 });

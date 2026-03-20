@@ -39,7 +39,7 @@ export default function SignIn() {
 
         setIsSubmitting(true);
         try {
-            console.log('sign in')
+            // console.log('sign in')
             await signIn({ email, password });
             // const response = await fetch('http://localhost:5000/api/auth/login', {
             //     method: 'POST',
@@ -129,9 +129,10 @@ export default function SignIn() {
                         style={styles.signInButton}
                         onPress={handleSignIn}
                         activeOpacity={0.8}
+                        disabled={isSubmitting}
                     >
-                        <Text style={styles.signInButtonText}>Sign In</Text>
-                        <MaterialIcons name="arrow-forward" size={20} color={COLORS.onPrimary} style={{ marginLeft: 8 }} />
+                        <Text style={styles.signInButtonText}>{isSubmitting ? "Signing In..." : "Sign In"}</Text>
+                        {!isSubmitting && <MaterialIcons name="arrow-forward" size={20} color={COLORS.onPrimary} style={{ marginLeft: 8 }} />}
                     </TouchableOpacity>
                 </View>
 

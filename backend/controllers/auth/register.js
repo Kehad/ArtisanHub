@@ -34,7 +34,7 @@ const register = async (req, res) => {
             name,
             email,
             password: hashedPassword,
-            role: role || 'artisan',
+            role: role || 'developer',
         });
 
         // Create Payload

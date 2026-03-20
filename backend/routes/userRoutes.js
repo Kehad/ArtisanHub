@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const downloadData = require('../controllers/user/downloadData');
-const deleteAccount = require('../controllers/user/deleteAccount');
-const { default: verifyJWT } = require('../middleware/auth');
+import downloadData from '../controllers/user/downloadData.js';
+import deleteAccount from '../controllers/user/deleteAccount.js';
+import verifyJWT from '../middleware/auth.js';
 
 router.use(verifyJWT);
 
@@ -12,4 +12,4 @@ router.route('/download-data')
 router.route('/delete-account')
     .delete(deleteAccount);
 
-module.exports = router;
+export default router;

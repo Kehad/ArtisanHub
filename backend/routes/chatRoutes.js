@@ -1,5 +1,8 @@
 import express from 'express';
-import { accessChat, fetchChats, sendMessage, allMessages } from '../controllers/chatController.js';
+import { accessChat } from '../controllers/chat/accessChat.js';
+import { fetchChats } from '../controllers/chat/fetchChats.js';
+import { sendMessage } from '../controllers/chat/sendMessage.js';
+import { allMessages } from '../controllers/chat/allMessages.js';
 import auth from '../middleware/auth.js'; // Ensure this exists
 
 const router = express.Router();

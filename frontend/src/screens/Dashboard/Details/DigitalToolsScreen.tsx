@@ -6,29 +6,27 @@ import { COLORS, hp, wp } from 'components/utils';
 import { StatusBar } from 'expo-status-bar';
 
 export default function DigitalToolsScreen({ navigation }: any) {
-    const [activeTool, setActiveTool] = useState<'calculator' | 'converter' | 'blueprints'>('calculator');
+    const [activeTool, setActiveTool] = useState<'pxconverter' | 'datacalc' | 'snippets'>('pxconverter');
 
-    // Calculator State
-    const [length, setLength] = useState('');
-    const [width, setWidth] = useState('');
-    const [area, setArea] = useState<number | null>(null);
+    // Pixel Converter State
+    const [pixels, setPixels] = useState('');
+    const [rem, setRem] = useState<string>('');
 
-    const calculateArea = () => {
-        const l = parseFloat(length);
-        const w = parseFloat(width);
-        if (!isNaN(l) && !isNaN(w)) {
-            setArea(l * w);
+    const convertPxToRem = () => {
+        const val = parseFloat(pixels);
+        if (!isNaN(val)) {
+            setRem(`${(val / 16).toFixed(3)} rem`);
         }
     };
 
-    // Converter State
-    const [inputValue, setInputValue] = useState('');
-    const [convertedValue, setConvertedValue] = useState<string>('');
+    // Data Calculator State
+    const [gbValue, setGbValue] = useState('');
+    const [mbValue, setMbValue] = useState<string>('');
 
-    const convertFtToM = () => {
-        const val = parseFloat(inputValue);
+    const convertGbToMb = () => {
+        const val = parseFloat(gbValue);
         if (!isNaN(val)) {
-            setConvertedValue(`${(val * 0.3048).toFixed(2)} meters`);
+            setMbValue(`${(val * 1024).toFixed(0)} MB`);
         }
     };
 
@@ -57,93 +55,82 @@ export default function DigitalToolsScreen({ navigation }: any) {
 
             {/* Tabs */}
             <View style={styles.tabBar}>
-                <ToolTab id="calculator" label="Material Calc" icon="calculate" />
-                <ToolTab id="converter" label="Unit Convert" icon="import-export" />
-                <ToolTab id="blueprints" label="Blueprints" icon="article" />
+                <ToolTab id="pxconverter" label="Px to Rem" icon="transform" />
+                <ToolTab id="datacalc" label="Data Calc" icon="storage" />
+                <ToolTab id="snippets" label="Snippets" icon="code" />
             </View>
 
             <ScrollView contentContainerStyle={styles.content}>
 
-                {activeTool === 'calculator' && (
+                {activeTool === 'pxconverter' && (
                     <View style={styles.toolContainer}>
-                        <Text style={styles.toolTitle}>Area Calculator</Text>
-                        <Text style={styles.toolDesc}>Calculate surface area for flooring, painting, or roofing.</Text>
+                        <Text style={styles.toolTitle}>Pixel to Rem Converter</Text>
+                        <Text style={styles.toolDesc}>Convert pixels to rem units (base 16px).</Text>
 
                         <View style={styles.inputGroup}>
-                            <Text style={styles.label}>Length (ft)</Text>
+                            <Text style={styles.label}>Pixels (px)</Text>
                             <TextInput
                                 style={styles.input}
                                 keyboardType="numeric"
-                                value={length}
-                                onChangeText={setLength}
-                                placeholder="0.0"
-                            />
-                        </View>
-                        <View style={styles.inputGroup}>
-                            <Text style={styles.label}>Width (ft)</Text>
-                            <TextInput
-                                style={styles.input}
-                                keyboardType="numeric"
-                                value={width}
-                                onChangeText={setWidth}
-                                placeholder="0.0"
+                                value={pixels}
+                                onChangeText={setPixels}
+                                placeholder="16"
                             />
                         </View>
 
-                        <TouchableOpacity style={styles.actionButton} onPress={calculateArea}>
-                            <Text style={styles.actionButtonText}>Calculate</Text>
+                        <TouchableOpacity style={styles.actionButton} onPress={convertPxToRem}>
+                            <Text style={styles.actionButtonText}>Convert</Text>
                         </TouchableOpacity>
 
-                        {area !== null && (
-                            <View style={styles.resultBox}>
-                                <Text style={styles.resultLabel}>Total Area</Text>
-                                <Text style={styles.resultValue}>{area.toFixed(2)} sq. ft</Text>
-                                <Text style={styles.resultSub}>Approx. material needed +10% waste: {(area * 1.1).toFixed(2)}</Text>
-                            </View>
-                        )}
-                    </View>
-                )}
-
-                {activeTool === 'converter' && (
-                    <View style={styles.toolContainer}>
-                        <Text style={styles.toolTitle}>Length Converter</Text>
-                        <Text style={styles.toolDesc}>Convert Feet to Meters instantly.</Text>
-
-                        <View style={styles.inputGroup}>
-                            <Text style={styles.label}>Feet</Text>
-                            <TextInput
-                                style={styles.input}
-                                keyboardType="numeric"
-                                value={inputValue}
-                                onChangeText={setInputValue}
-                                placeholder="0.0"
-                            />
-                        </View>
-
-                        <TouchableOpacity style={styles.actionButton} onPress={convertFtToM}>
-                            <Text style={styles.actionButtonText}>Convert to Meters</Text>
-                        </TouchableOpacity>
-
-                        {convertedValue !== '' && (
+                        {rem !== '' && (
                             <View style={styles.resultBox}>
                                 <Text style={styles.resultLabel}>Result</Text>
-                                <Text style={styles.resultValue}>{convertedValue}</Text>
+                                <Text style={styles.resultValue}>{rem}</Text>
                             </View>
                         )}
                     </View>
                 )}
 
-                {activeTool === 'blueprints' && (
-                    <View>
-                        <Text style={styles.sectionTitle}>Saved Blueprints</Text>
+                {activeTool === 'datacalc' && (
+                    <View style={styles.toolContainer}>
+                        <Text style={styles.toolTitle}>Data Converter</Text>
+                        <Text style={styles.toolDesc}>Convert GB to MB for server sizing.</Text>
 
-                        {[1, 2, 3].map((item) => (
-                            <TouchableOpacity key={item} style={styles.blueprintCard}>
+                        <View style={styles.inputGroup}>
+                            <Text style={styles.label}>Gigabytes (GB)</Text>
+                            <TextInput
+                                style={styles.input}
+                                keyboardType="numeric"
+                                value={gbValue}
+                                onChangeText={setGbValue}
+                                placeholder="1"
+                            />
+                        </View>
+
+                        <TouchableOpacity style={styles.actionButton} onPress={convertGbToMb}>
+                            <Text style={styles.actionButtonText}>Convert to MB</Text>
+                        </TouchableOpacity>
+
+                        {mbValue !== '' && (
+                            <View style={styles.resultBox}>
+                                <Text style={styles.resultLabel}>Result</Text>
+                                <Text style={styles.resultValue}>{mbValue}</Text>
+                            </View>
+                        )}
+                    </View>
+                )}
+
+                {activeTool === 'snippets' && (
+                    <View>
+                        <Text style={styles.sectionTitle}>Saved Snippets</Text>
+
+                        {['React Component', 'API Fetch', 'Flexbox Center'].map((item, index) => (
+                            <TouchableOpacity key={index} style={styles.blueprintCard}>
                                 <View style={styles.blueprintIcon}>
-                                    <MaterialIcons name="grid-on" size={32} color={COLORS.primary} />
+                                    <MaterialIcons name="code" size={32} color={COLORS.primary} />
                                 </View>
                                 <View style={{ flex: 1 }}>
-                                    <Text style={styles.bpTitle}>Project Alpha Floor Plan {item}</Text>
+                                    <Text style={styles.bpTitle}>{item}</Text>
                                     <Text style={styles.bpDate}>Last edited: 2 days ago</Text>
                                 </View>
                                 <MaterialIcons name="chevron-right" size={24} color={COLORS.textSecondary} />
@@ -152,7 +139,7 @@ export default function DigitalToolsScreen({ navigation }: any) {
 
                         <TouchableOpacity style={styles.addBpButton}>
                             <MaterialIcons name="add" size={24} color={COLORS.primary} />
-                            <Text style={styles.addBpText}>Import New Blueprint</Text>
+                            <Text style={styles.addBpText}>Add New Snippet</Text>
                         </TouchableOpacity>
                     </View>
                 )}

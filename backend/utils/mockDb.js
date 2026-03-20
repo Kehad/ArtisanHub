@@ -14,7 +14,7 @@ const initialData = {
                 name: 'John Doe',
                 email: 'keahnney01@gmail.com',
                 password: 'password',
-                role: 'artisan'
+                role: 'developer'
             },
             portfolios: [],
             jobs: [],
@@ -45,17 +45,30 @@ class MockDb {
         fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2), 'utf8');
     }
 
-    // Helper to get all items of a collection type across all users
+    // Helper to get all items of a collection type across all users or top-level
     getAllItems(data, collection) {
         if (collection === 'users') {
             return data.users.map(u => ({ ...u.profile, _fullData: u }));
-            // _fullData is a hack if needed, but for standard queries profile is enough. 
-            // However, we must ensure we don't lose the wrapper if we need it.
-            // For simple CRUD, returning profile is safest for compatibility.
         }
 
-        // Flatten all nested arrays
-        return data.users.flatMap(u => (u[collection] || []));
+        const itemsMap = new Map();
+
+        // 1. Get top-level items if they exist
+        if (data[collection] && Array.isArray(data[collection])) {
+            data[collection].forEach(item => {
+                if (item._id) itemsMap.set(item._id.toString(), item);
+            });
+        }
+
+        // 2. Get nested items (legacy support or user-specific items)
+        const nestedItems = data.users.flatMap(u => (u[collection] || []));
+        nestedItems.forEach(item => {
+            if (item._id && !itemsMap.has(item._id.toString())) {
+                itemsMap.set(item._id.toString(), item);
+            }
+        });
+
+        return Array.from(itemsMap.values());
     }
 
     // Generic CRUD helpers
@@ -76,7 +89,7 @@ class MockDb {
     findOne(collection, query = {}) {
         const results = this.find(collection, query);
         console.log(results, 'results');
-        
+
         return results.length > 0 ? results[0] : null;
     }
 
@@ -137,25 +150,88 @@ class MockDb {
         return newItem;
     }
 
+    // update(collection, _id, updates) {
+    //     const data = this.read();
+    //     let updatedItem = null;
+
+    //     if (collection === 'users') {
+    //         const userIdx = data.users.findIndex(u => u.profile._id == _id);
+    //         if (userIdx !== -1) {
+    //             data.users[userIdx].profile = {
+    //                 ...data.users[userIdx].profile,
+    //                 ...updates,
+    //                 updatedAt: new Date().toISOString()
+    //             };
+    //             updatedItem = data.users[userIdx].profile;
+    //         }
+    //     } else {
+    //         // Search all users for the item
+    //         for (const user of data.users) {
+    //             if (user[collection]) {
+    //                 const idx = user[collection].findIndex(i => i._id == _id);
+    //                 if (idx !== -1) {
+    //                     user[collection][idx] = {
+    //                         ...user[collection][idx],
+    //                         ...updates,
+    //                         updatedAt: new Date().toISOString()
+    //                     };
+    //                     updatedItem = user[collection][idx];
+    //                     break;
+    //                 }
+    //             }
+    //         }
+    //     }
+
+    //     if (updatedItem) {
+    //         this.save(data);
+    //         return updatedItem;
+    //     }
+    //     return null;
+    // }
     update(collection, _id, updates) {
         const data = this.read();
         let updatedItem = null;
+        let found = false;
 
-        if (collection === 'users') {
-            const userIdx = data.users.findIndex(u => u.profile._id == _id);
-            if (userIdx !== -1) {
-                data.users[userIdx].profile = {
-                    ...data.users[userIdx].profile,
-                    ...updates,
-                    updatedAt: new Date().toISOString()
-                };
-                updatedItem = data.users[userIdx].profile;
+        // 1. Try ROOT Level First (e.g., data.jobs, data.users)
+        if (data[collection] && Array.isArray(data[collection])) {
+
+            // Special Case: 'users' collection has a nested .profile structure
+            if (collection === 'users') {
+                const userIdx = data.users.findIndex(u => u.profile?._id == _id); // Use ?. safely
+                if (userIdx !== -1) {
+                    data.users[userIdx].profile = {
+                        ...data.users[userIdx].profile,
+                        ...updates,
+                        updatedAt: new Date().toISOString()
+                    };
+                    updatedItem = data.users[userIdx].profile;
+                    found = true;
+                }
             }
-        } else {
-            // Search all users for the item
+            // Standard Case: Normal root arrays (e.g., data.jobs)
+            else {
+                const idx = data[collection].findIndex(item => item._id == _id);
+                if (idx !== -1) {
+                    data[collection][idx] = {
+                        ...data[collection][idx],
+                        ...updates,
+                        updatedAt: new Date().toISOString()
+                    };
+                    updatedItem = data[collection][idx];
+                    found = true;
+                }
+            }
+        }
+
+        // 2. Fallback: Search INSIDE Users (Nested Data)
+        // If not found at root, check if it's hidden inside a user (e.g., portfolios)
+        if (!found && data.users) {
             for (const user of data.users) {
-                if (user[collection]) {
+                // Check if this user has the collection (e.g., user.portfolios)
+                if (user[collection] && Array.isArray(user[collection])) {
                     const idx = user[collection].findIndex(i => i._id == _id);
+
                     if (idx !== -1) {
                         user[collection][idx] = {
                             ...user[collection][idx],
@@ -163,7 +239,8 @@ class MockDb {
                             updatedAt: new Date().toISOString()
                         };
                         updatedItem = user[collection][idx];
-                        break;
+                        found = true;
+                        break; // Stop loop once found
                     }
                 }
             }
@@ -173,6 +250,7 @@ class MockDb {
             this.save(data);
             return updatedItem;
         }
+
         return null;
     }
 
