@@ -3,7 +3,7 @@ import apiService from '../services/apiService';
 import { API_ENDPOINTS } from '../api/config';
 
 // 1. Define the Job Interface based on your JSON data
-export interface Job {
+export interface JobProp {
     _id: string;
     title: string;
     client: string;
@@ -21,19 +21,20 @@ export interface Job {
 
 // 2. Define what data/functions the Context provides
 interface JobContextType {
-    jobs: Job[];
+    jobs: JobProp[];
     loading: boolean;
     error: string | null;
     fetchJobs: () => Promise<void>;
-    fetchJobById: (id: string) => Promise<Job | null>;
+    fetchJobById: (id: string) => Promise<JobProp | null>;
     postJob: (jobData: any) => Promise<void>;
     applyToJob: (jobId: string, userId: string) => Promise<void>;
+    getMyJobs: (type?: string | null) => Promise<JobProp[]>;
 }
 
 const JobContext = createContext<JobContextType | undefined>(undefined);
 
 export const JobProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [jobs, setJobs] = useState<Job[]>([]);
+    const [jobs, setJobs] = useState<JobProp[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -48,7 +49,7 @@ export const JobProvider: React.FC<{ children: React.ReactNode }> = ({ children 
             // Assuming response.data is the array of jobs, or response itself is the array
             // Adjust based on your actual backend response structure
             const jobList = Array.isArray(response) ? response : response.jobs || [];
-            console.log("jobList", jobList);
+            // console.log("jobList", jobList);
 
             setJobs(jobList);
         } catch (err: any) {
@@ -60,7 +61,7 @@ export const JobProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }, []);
 
     // 4. Fetch Single Job (GET)
-    const fetchJobById = async (id: string): Promise<Job | null> => {
+    const fetchJobById = async (id: string): Promise<JobProp | null> => {
         try {
             const response: any = await apiService.get(`${API_ENDPOINTS.JOBS.GET_ALL}/${id}`);
             return response;
@@ -91,12 +92,12 @@ export const JobProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const applyToJob = async (jobId: string, userId: string) => {
         try {
             // Usually endpoints look like: /jobs/apply/:id
-            console.log("jobId", jobId);
-            console.log("userId", userId);
-            const endpoint = `${API_ENDPOINTS.JOBS.GET_ALL}/apply/${jobId}`;
-            console.log("Applying to job:", endpoint);
+            // console.log("jobId", jobId);
+            // console.log("userId", userId);
+            const endpoint = `${API_ENDPOINTS.JOBS.APPLY}/${jobId}`;
+            // console.log("Applying to job:", endpoint);
             const response = await apiService.post(endpoint, { userId });
-            console.log("Applied successfully:", response);
+            // console.log("Applied successfully:", response);
 
             // Optional: Update local state to show 'Applied' status without refreshing everything
             setJobs(prevJobs => prevJobs.map(job =>
@@ -111,6 +112,28 @@ export const JobProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         }
     };
 
+     // 6. Get my Job (GET) - For Artisans
+    const getMyJobs = async (type?: string | null): Promise<JobProp[]> => {
+        try {
+            // Usually endpoints look like: /jobs/apply/:id
+
+            const endpoint = `${API_ENDPOINTS.JOBS.MY_JOBS}/user/me?type${type}`;
+       
+            const response = await apiService.get(endpoint);
+            if (!response) {
+                return [];
+            }
+  
+            return response as JobProp[];
+        } catch (err: any) {
+            console.error("Apply Job Failed:", err.message);
+            throw err;
+        }
+    };
+
+
+    
+
     // Automatically load jobs when the provider mounts
     useEffect(() => {
         fetchJobs();
@@ -124,7 +147,8 @@ export const JobProvider: React.FC<{ children: React.ReactNode }> = ({ children 
             fetchJobs,
             fetchJobById,
             postJob,
-            applyToJob
+            applyToJob,
+            getMyJobs,
         }}>
             {children}
         </JobContext.Provider>

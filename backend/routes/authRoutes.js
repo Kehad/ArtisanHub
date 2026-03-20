@@ -4,7 +4,7 @@ import logout from '../controllers/auth/logout.js';
 import register from '../controllers/auth/register.js';
 import forgotPassword from '../controllers/auth/forgotPassword.js';
 import changePassword from '../controllers/auth/changePassword.js';
-import verifyJWT from '../middleware/auth.js';
+import verifyJWT from '../middleware/verifyJWT.js';
 
 const router = express.Router();
 

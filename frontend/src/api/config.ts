@@ -13,6 +13,7 @@ export const API_ENDPOINTS = {
     JOBS: {
         GET_ALL: `${BASE_URL}/jobs`,
         APPLY: `${BASE_URL}/jobs/apply`,
+        MY_JOBS: `${BASE_URL}/jobs/user/me?type=applied`,
     },
     CHAT: `${BASE_URL}/chat`,
 };

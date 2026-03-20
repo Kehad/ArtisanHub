@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -7,7 +7,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { JobsStackParamList } from 'src/navigation/JobsNavigator';
-import { useJobs } from 'src/context/JobContext';
+import { JobProp, useJobs } from 'src/context/JobContext';
 import { useAuth } from 'src/context/AuthContext';
 import { JobCard } from './components/JobCard';
 
@@ -15,14 +15,25 @@ type JobScreenNavigationProp = StackNavigationProp<JobsStackParamList>;
 
 export default function AppliedJobsScreen() {
     const navigation = useNavigation<JobScreenNavigationProp>();
-    const { jobs, loading, fetchJobs } = useJobs();
+    const { jobs, loading, fetchJobs, getMyJobs } = useJobs();
+    const [appliedJobs, setAppliedJobs] = useState<JobProp[]>([]);
     const { user } = useAuth();
 
-    const appliedJobs = useMemo(() => {
-        if (!user) return [];
-        return jobs.filter(job => job.applicants && job.applicants.includes(user.id));
-    }, [jobs, user]);
+    const getJobHandler = async () => {
+        const appliedJobs = await getMyJobs();
+        console.log('appliedJobs', appliedJobs)
+        setAppliedJobs(appliedJobs)
+    }
 
+    useEffect(() => {
+        getJobHandler();
+    },[jobs])
+
+    // const appliedJobs = useMemo(() => {
+    //     if (!user) return [];
+    //     return jobs.filter(job => job.applicants && job.applicants.includes(user.id));
+    // }, [jobs, user]);
+    
     const renderJobItem = ({ item }: { item: any }) => (
         <JobCard
             item={item}

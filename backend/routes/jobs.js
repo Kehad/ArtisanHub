@@ -1,12 +1,12 @@
 import express from 'express';
 import { getJobs } from '../controllers/job/getJobs.js';
-import auth from '../middleware/auth.js';
 import { deleteJob } from '../controllers/job/deleteJob.js';
 import { getMyJobs } from '../controllers/job/getMyJobs.js';
 import { getJobById } from '../controllers/job/getJobById.js';
 import { updateJob } from '../controllers/job/updateJob.js';
 import { applyForJob } from '../controllers/job/applyforJob.js';
 import { createJob } from '../controllers/job/createJob.js';
+import verifyJWT from '../middleware/verifyJWT.js';
 
 const router = express.Router();
 
@@ -18,20 +18,20 @@ router.get('/', getJobs);
 // @route   POST api/jobs
 // @desc    Create a job
 // @access  Private (Admin/Client)
-router.post('/', auth, createJob);
+router.post('/', verifyJWT, createJob);
 
 // @route   PUT api/jobs/apply/:id
 // @desc    Apply for a job
 // @access  Private
-// router.put('/apply/:id', auth, applyForJob);
-router.post('/apply/:_id', applyForJob);
+router.post('/apply/:_id', verifyJWT, applyForJob);
+// router.post('/apply/:_id', applyForJob);
 
 // Public Routes
 router.get('/:id', getJobById);
 
 // Private Routes
-router.put('/:id', auth, updateJob); // Update
-router.delete('/:id', auth, deleteJob); // Delete
-router.get('/user/me', auth, getMyJobs); // Get My Jobs
+router.put('/:id', verifyJWT, updateJob); // Update
+router.delete('/:id', verifyJWT, deleteJob); // Delete
+router.get('/user/me', verifyJWT, getMyJobs); // Get My Jobs
 
 export default router;

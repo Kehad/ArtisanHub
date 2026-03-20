@@ -214,7 +214,7 @@
       "description": "Need a responsive landing page for my new startup. Figma design provided.",
       "status": "applied",
       "createdAt": "2026-01-29T08:00:00.000Z",
-      "updatedAt": "2026-03-20T13:49:54.646Z"
+      "updatedAt": "2026-03-20T19:13:52.119Z"
     },
     {
       "_id": "job_2",
@@ -235,7 +235,7 @@
       "description": "Application crashes on the checkout screen. Need an expert to debug.",
       "status": "applied",
       "createdAt": "2026-01-28T14:30:00.000Z",
-      "updatedAt": "2026-02-04T22:38:50.488Z"
+      "updatedAt": "2026-03-20T19:59:18.741Z"
     },
     {
       "_id": "job_3",
@@ -251,10 +251,7 @@
       "urgent": false,
       "posted": "2026-02-03T09:15:00.000Z",
       "postedBy": "user_client_john",
-      "applicants": [
-        "1769653851379",
-        null
-      ],
+      "applicants": [],
       "description": "Looking for a designer to create high-fidelity mockups for a fintech app.",
       "status": "applied",
       "createdAt": "2026-02-03T09:15:00.000Z",
@@ -296,10 +293,13 @@
       "urgent": false,
       "posted": "2026-02-01T16:45:00.000Z",
       "postedBy": "user_client_sarah",
-      "applicants": [],
+      "applicants": [
+        "1769653851379"
+      ],
       "description": "Need help configuring an EC2 instance and deploying a Node.js app.",
-      "status": "open",
-      "createdAt": "2026-02-01T16:45:00.000Z"
+      "status": "applied",
+      "createdAt": "2026-02-01T16:45:00.000Z",
+      "updatedAt": "2026-03-20T18:29:18.164Z"
     },
     {
       "_id": "job_6",
@@ -314,10 +314,13 @@
       "urgent": false,
       "posted": "2026-02-01T16:45:00.000Z",
       "postedBy": "user_client_david",
-      "applicants": [],
+      "applicants": [
+        "1769653851379"
+      ],
       "description": "Minimalist logo design needed for a new coffee brand.",
-      "status": "open",
-      "createdAt": "2026-02-01T16:45:00.000Z"
+      "status": "applied",
+      "createdAt": "2026-02-01T16:45:00.000Z",
+      "updatedAt": "2026-03-20T19:00:27.880Z"
     }
   ]
 }

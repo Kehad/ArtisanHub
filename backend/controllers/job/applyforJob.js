@@ -4,7 +4,7 @@ import dbWrapper from '../../utils/dbWrapper.js';
 
 export const applyForJob = async (req, res) => {
     try {
-        console.log(req)
+        // console.log(req)
         const { userId } = req.body;
         console.log('req.params 2', req.params);
         // const jobId = req.params.id;
@@ -27,10 +27,11 @@ export const applyForJob = async (req, res) => {
 
         // 3. User Identification
         // console.log('req.user', req.user);
-        // const userId = req.user.id || req.user.email;
-        // if (!userId) {
-        //     return res.status(401).json({ message: "User ID missing. Please login." });
-        // }
+        const usersId = req.user._id || req.user.email;
+        console.log('usersId', usersId)
+        if (!userId) {
+            return res.status(401).json({ message: "User ID missing. Please login." });
+        }
 
         // 4. Check if already applied
         if (!job.applicants) job.applicants = [];
